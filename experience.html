@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experience — Azaan</title>
+  <meta name="description" content="Experience and education timeline of Azaan — Maven Silicon internship, VIT Vellore, leadership roles." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    @media (max-width: 1023px) { .exp-grid { grid-template-columns: 1fr; } }
+    .club-card {
+      background: var(--bg-soft); border-radius: var(--r-lg);
+      padding: 36px; display: flex; flex-direction: column; gap: 16px;
+    }
+    .club-card .role-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--lime-50); border: 1px solid var(--lime-200);
+      border-radius: var(--r-pill); padding: 4px 14px;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+      color: var(--ink-2); width: fit-content;
+    }
+    .club-card h3 { font-size: 1.2rem; font-weight: 600; }
+    .club-card p { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+    .clubs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 767px) { .clubs-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="progress-bar"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- MENU OVERLAY -->
+<!-- ═══ LUXURY EDITORIAL MENU OVERLAY ═══ -->
+<div class="menu-overlay" id="menuOverlay" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+  <div class="menu-overlay-container">
+    <!-- Overlay Header -->
+    <div class="menu-overlay-header">
+      <a class="logo" href="index.html">Azaan</a>
+      <button class="close-btn" id="closeMenu" aria-label="Close menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Overlay Body: 2 Columns -->
+    <div class="menu-overlay-body">
+      <!-- Left: Navigation Links -->
+      <div class="menu-nav-col">
+        <span class="menu-section-label">Navigation</span>
+        <nav class="menu-links" aria-label="Main navigation">
+          <a class="menu-link" href="index.html">
+            <span class="menu-link-num">01</span>
+            <span class="menu-link-text">Home</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="about.html">
+            <span class="menu-link-num">02</span>
+            <span class="menu-link-text">About</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="projects.html">
+            <span class="menu-link-num">03</span>
+            <span class="menu-link-text">Projects</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="skills.html">
+            <span class="menu-link-num">04</span>
+            <span class="menu-link-text">Skills &amp; Tools</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="experience.html">
+            <span class="menu-link-num">05</span>
+            <span class="menu-link-text">Experience</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="gallery.html">
+            <span class="menu-link-num">06</span>
+            <span class="menu-link-text">Gallery</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="contact.html">
+            <span class="menu-link-num">07</span>
+            <span class="menu-link-text">Contact</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Right: Info / Quick Connect Panel -->
+      <div class="menu-info-col">
+        <div class="menu-info-card">
+          <span class="menu-section-label">Current Focus</span>
+          <p class="menu-info-desc">B.Tech ECE @ VIT Vellore (CGPA 8.47). Specializing in VLSI Physical Design, RTL-to-GDS sign-off &amp; ML for EDA.</p>
+          <div class="menu-status-pill">
+            <span class="dot-wrap"><span class="dot-ring"></span><span class="dot-core"></span></span>
+            <span>Available for PD Roles — 2026</span>
+          </div>
+        </div>
+
+        <div class="menu-info-card">
+          <span class="menu-section-label">Direct Connect</span>
+          <div class="menu-contact-links">
+            <a href="mailto:azaanahamed.k@gmail.com" class="menu-contact-item">
+              <span class="contact-label">Email</span>
+              <span class="contact-val">azaanahamed.k@gmail.com</span>
+            </a>
+            <a href="https://linkedin.com/in/azaan" target="_blank" rel="noopener" class="menu-contact-item">
+              <span class="contact-label">LinkedIn</span>
+              <span class="contact-val">in/azaan</span>
+            </a>
+            <a href="https://github.com/azaan" target="_blank" rel="noopener" class="menu-contact-item">
+              <span class="contact-label">GitHub</span>
+              <span class="contact-val">github.com/azaan</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="menu-actions">
+          <a class="btn-primary" href="resume.html" style="font-size:13px;padding:12px 24px;">Download Resume ↓</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlay Footer Note -->
+    <div class="menu-overlay-footer-note">
+      <span>VLSI Physical Design Engineer</span>
+      <span>Designed &amp; Built by Azaan</span>
+      <span>Vellore / Chennai, India</span>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">Azaan</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="skills.html">Skills</a>
+      <a href="experience.html" class="active">Experience</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="menu-btn" id="openMenu" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Experience</p>
+      <h1 class="h1 reveal">The full <span class="serif-em">timeline</span></h1>
+      <p class="reveal reveal-delay-1">Industry training, education, and leadership — all in one place.</p>
+    </div>
+  </div>
+
+  <!-- WORK EXPERIENCE -->
+  <section class="section" aria-labelledby="work-exp-heading">
+    <div class="container">
+      <p class="eyebrow reveal">01 — Work</p>
+      <h2 class="h2 mb-48 reveal reveal-delay-1">Industry <span class="serif-em">experience</span></h2>
+
+      <div class="timeline reveal">
+        <!-- Maven Silicon -->
+        <div class="timeline-item">
+          <div class="timeline-date">2024 – Present</div>
+          <div class="timeline-node"></div>
+          <div class="timeline-content">
+            <h3>Maven Silicon Pvt. Ltd.</h3>
+            <p class="sub">Physical Design Training / Internship &nbsp;·&nbsp; Bengaluru (Remote)</p>
+            <ul>
+              <li>Ran full RTL-to-GDS flows on industry IPs using Cadence Innovus and Genus on real process nodes</li>
+              <li>Performed floorplanning (die area, core margins, macro placement, power ring), placement, CTS, and global + detailed routing</li>
+              <li>Closed timing using PrimeTime STA reports; resolved setup, hold, and skew violations through ECO iterations</li>
+              <li>Ran DRC and LVS sign-off; debugged violations using Virtuoso and Magic VLSI</li>
+              <li>Automated repetitive flow tasks with TCL scripting inside Innovus and Genus shells</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section--soft" style="padding:clamp(64px,8vw,120px) 0;" aria-labelledby="edu-heading">
+    <div class="container">
+      <p class="eyebrow reveal">02 — Education</p>
+      <h2 class="h2 mb-48 reveal reveal-delay-1">Where I <span class="serif-em">studied</span></h2>
+
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-date">2021 – 2025</div>
+          <div class="timeline-node"></div>
+          <div class="timeline-content">
+            <h3>VIT Vellore</h3>
+            <p class="sub">B.Tech — Electronics &amp; Communication Engineering &nbsp;·&nbsp; CGPA: 8.47</p>
+            <ul>
+              <li>Core coursework: VLSI Design, Digital IC Design, Embedded Systems, Digital Signal Processing, Microprocessors, Analog Electronics</li>
+              <li>Final-year specialisation: VLSI Physical Design — RTL-to-GDS, STA, DRC/LVS</li>
+              <li>Project: ML-based routing congestion predictor for RV32I (custom 30,500-row dataset from Cadence sweeps)</li>
+              <li>Project: SPI Controller physical design with Qflow on OSU018 180nm</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2019 – 2021</div>
+          <div class="timeline-node"></div>
+          <div class="timeline-content">
+            <h3>Class XII — TODO: School Name</h3>
+            <p class="sub">Physics, Chemistry, Mathematics, Computer Science</p>
+            <ul>
+              <li>TODO: Add percentage / score</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section class="section" aria-labelledby="leadership-heading">
+    <div class="container">
+      <p class="eyebrow reveal">03 — Leadership &amp; Clubs</p>
+      <h2 class="h2 mb-48 reveal reveal-delay-1">Beyond the <span class="serif-em">terminal</span></h2>
+
+      <div class="clubs-grid">
+        <!-- SAHITI -->
+        <div class="club-card reveal">
+          <div class="role-badge">📷 Photography Head</div>
+          <h3>SAHITI — Arts &amp; Photography Club</h3>
+          <p>Led photography events, workshops, and exhibitions at VIT Vellore as Photography Head. Coordinated shoots for college fests and alumni events. Mentored junior members on composition, lighting, and post-processing.</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-3);">VIT Vellore · 2022 – 2025</p>
+        </div>
+
+        <!-- VRIKSH -->
+        <div class="club-card reveal reveal-delay-1">
+          <div class="role-badge">🌿 Outreach Head</div>
+          <h3>VRIKSH — Sustainability Club</h3>
+          <p>As Outreach Head, drove community engagement for VIT's sustainability and environment club. Organised campus drives, social media campaigns, and inter-college collaborations on environmental awareness.</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-3);">VIT Vellore · 2022 – 2024</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <h2 class="footer-cta-headline">Let's build something that <span class="serif-em">tapes out.</span></h2>
+    <a class="btn-primary" href="contact.html" style="background:var(--lime-400);color:var(--ink);box-shadow:none;">
+      <span class="arrow">→</span> Get in Touch
+    </a>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <a class="logo" href="index.html" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:24px;color:rgba(255,255,255,.7);">Azaan</a>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <p class="footer-copy">Designed &amp; built by Azaan · 2025</p>
+      <button class="back-to-top" aria-label="Back to top">↑</button>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

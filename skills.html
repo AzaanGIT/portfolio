@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills &amp; Tools — Azaan</title>
+  <meta name="description" content="VLSI, EDA tools, scripting languages, and ML skills of Azaan." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    @media (max-width: 767px) { .skills-grid { grid-template-columns: 1fr; } }
+    .flow-stages {
+      display: flex; gap: 0; margin: 48px 0;
+      border: 1px solid var(--line); border-radius: var(--r-lg);
+      overflow: hidden; flex-wrap: wrap;
+    }
+    .flow-stage {
+      flex: 1; min-width: 100px;
+      padding: 24px 16px; text-align: center;
+      border-right: 1px solid var(--line);
+      position: relative;
+    }
+    .flow-stage:last-child { border-right: none; }
+    .flow-stage::after {
+      content: '→';
+      position: absolute; right: -10px; top: 50%; transform: translateY(-50%);
+      font-size: 14px; color: var(--lime-400); font-weight: 700; z-index: 1;
+    }
+    .flow-stage:last-child::after { display: none; }
+    .flow-stage .num { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--lime-500); margin-bottom: 6px; font-weight: 500; }
+    .flow-stage .name { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .flow-stage .sub { font-size: 11px; color: var(--ink-3); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+    @media (max-width: 767px) { .flow-stages { flex-direction: column; } .flow-stage { border-right: none; border-bottom: 1px solid var(--line); } .flow-stage::after { content: '↓'; right: auto; left: 50%; bottom: -10px; top: auto; transform: translateX(-50%); } .flow-stage:last-child { border-bottom: none; } }
+    .proficiency-row { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .proficiency-row:last-child { border-bottom: none; }
+    .proficiency-label { font-size: 14px; font-weight: 500; width: 160px; flex-shrink: 0; }
+    .proficiency-bar-wrap { flex: 1; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+    .proficiency-bar { height: 100%; background: var(--lime-400); border-radius: 2px; transition: width 1.2s var(--ease-out-expo); width: 0; }
+    .proficiency-bar.animated { /* set via JS */ }
+    .proficiency-pct { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); width: 36px; text-align: right; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+<div class="progress-bar"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- MENU OVERLAY -->
+<!-- ═══ LUXURY EDITORIAL MENU OVERLAY ═══ -->
+<div class="menu-overlay" id="menuOverlay" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+  <div class="menu-overlay-container">
+    <!-- Overlay Header -->
+    <div class="menu-overlay-header">
+      <a class="logo" href="index.html">Azaan</a>
+      <button class="close-btn" id="closeMenu" aria-label="Close menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Overlay Body: 2 Columns -->
+    <div class="menu-overlay-body">
+      <!-- Left: Navigation Links -->
+      <div class="menu-nav-col">
+        <span class="menu-section-label">Navigation</span>
+        <nav class="menu-links" aria-label="Main navigation">
+          <a class="menu-link" href="index.html">
+            <span class="menu-link-num">01</span>
+            <span class="menu-link-text">Home</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="about.html">
+            <span class="menu-link-num">02</span>
+            <span class="menu-link-text">About</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="projects.html">
+            <span class="menu-link-num">03</span>
+            <span class="menu-link-text">Projects</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="skills.html">
+            <span class="menu-link-num">04</span>
+            <span class="menu-link-text">Skills &amp; Tools</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="experience.html">
+            <span class="menu-link-num">05</span>
+            <span class="menu-link-text">Experience</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="gallery.html">
+            <span class="menu-link-num">06</span>
+            <span class="menu-link-text">Gallery</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="contact.html">
+            <span class="menu-link-num">07</span>
+            <span class="menu-link-text">Contact</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Right: Info / Quick Connect Panel -->
+      <div class="menu-info-col">
+        <div class="menu-info-card">
+          <span class="menu-section-label">Current Focus</span>
+          <p class="menu-info-desc">B.Tech ECE @ VIT Vellore (CGPA 8.47). Specializing in VLSI Physical Design, RTL-to-GDS sign-off &amp; ML for EDA.</p>
+          <div class="menu-status-pill">
+            <span class="dot-wrap"><span class="dot-ring"></span><span class="dot-core"></span></span>
+            <span>Available for PD Roles — 2026</span>
+          </div>
+        </div>
+
+        <div class="menu-info-card">
+          <span class="menu-section-label">Direct Connect</span>
+          <div class="menu-contact-links">
+            <a href="mailto:azaanahamed.k@gmail.com" class="menu-contact-item">
+              <span class="contact-label">Email</span>
+              <span class="contact-val">azaanahamed.k@gmail.com</span>
+            </a>
+            <a href="https://linkedin.com/in/azaan" target="_blank" rel="noopener" class="menu-contact-item">
+              <span class="contact-label">LinkedIn</span>
+              <span class="contact-val">in/azaan</span>
+            </a>
+            <a href="https://github.com/azaan" target="_blank" rel="noopener" class="menu-contact-item">
+              <span class="contact-label">GitHub</span>
+              <span class="contact-val">github.com/azaan</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="menu-actions">
+          <a class="btn-primary" href="resume.html" style="font-size:13px;padding:12px 24px;">Download Resume ↓</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlay Footer Note -->
+    <div class="menu-overlay-footer-note">
+      <span>VLSI Physical Design Engineer</span>
+      <span>Designed &amp; Built by Azaan</span>
+      <span>Vellore / Chennai, India</span>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">Azaan</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="skills.html" class="active">Skills</a>
+      <a href="experience.html">Experience</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="menu-btn" id="openMenu" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Skills &amp; Tools</p>
+      <h1 class="h1 reveal">What I <span class="serif-em">work with</span></h1>
+      <p class="reveal reveal-delay-1">From RTL synthesis to routing sign-off — the full stack of a physical design engineer.</p>
+    </div>
+  </div>
+
+  <!-- FLOW STAGES -->
+  <section class="section" aria-labelledby="flow-heading">
+    <div class="container">
+      <p class="eyebrow reveal">01 — RTL-to-GDS Flow</p>
+      <h2 class="h2 mb-24 reveal reveal-delay-1">The full <span class="serif-em">physical design</span> flow</h2>
+      <p style="font-size:15px;color:var(--ink-2);max-width:600px;margin-bottom:48px;" class="reveal">
+        I run every stage of this flow — not just individual steps. Understanding how each stage feeds the next is what makes a good physical design engineer.
+      </p>
+      <div class="flow-stages reveal">
+        <div class="flow-stage"><div class="num">01</div><div class="name">Synthesis</div><div class="sub">Genus / Yosys</div></div>
+        <div class="flow-stage"><div class="num">02</div><div class="name">Floorplan</div><div class="sub">Innovus</div></div>
+        <div class="flow-stage"><div class="num">03</div><div class="name">Placement</div><div class="sub">Innovus</div></div>
+        <div class="flow-stage"><div class="num">04</div><div class="name">CTS</div><div class="sub">Innovus</div></div>
+        <div class="flow-stage"><div class="num">05</div><div class="name">Routing</div><div class="sub">Innovus</div></div>
+        <div class="flow-stage"><div class="num">06</div><div class="name">STA</div><div class="sub">PrimeTime</div></div>
+        <div class="flow-stage"><div class="num">07</div><div class="name">DRC/LVS</div><div class="sub">Virtuoso</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS GROUPS -->
+  <section class="section--soft" style="padding:clamp(64px,8vw,120px) 0;" aria-labelledby="skills-heading">
+    <div class="container">
+      <p class="eyebrow reveal">02 — Tool Stack</p>
+      <h2 class="h2 mb-48 reveal reveal-delay-1">Tools &amp; <span class="serif-em">languages</span></h2>
+
+      <div class="skills-grid">
+        <!-- EDA Tools -->
+        <div class="skill-group reveal">
+          <h3>EDA Tools</h3>
+          <div class="skill-chips">
+            <span class="skill-chip">Cadence Innovus</span>
+            <span class="skill-chip">Cadence Genus</span>
+            <span class="skill-chip">Virtuoso</span>
+            <span class="skill-chip">PrimeTime (STA)</span>
+            <span class="skill-chip">Qflow</span>
+            <span class="skill-chip">Xcelium</span>
+            <span class="skill-chip">Magic VLSI</span>
+            <span class="skill-chip">NetGen</span>
+          </div>
+        </div>
+
+        <!-- Languages & Scripting -->
+        <div class="skill-group reveal reveal-delay-1">
+          <h3>Languages &amp; Scripting</h3>
+          <div class="skill-chips">
+            <span class="skill-chip">Verilog</span>
+            <span class="skill-chip">SystemVerilog</span>
+            <span class="skill-chip">TCL</span>
+            <span class="skill-chip">Perl</span>
+            <span class="skill-chip">Python</span>
+            <span class="skill-chip">Bash / Linux</span>
+            <span class="skill-chip">SPICE</span>
+          </div>
+        </div>
+
+        <!-- ML / Web -->
+        <div class="skill-group reveal">
+          <h3>ML &amp; Web (for EDA)</h3>
+          <div class="skill-chips">
+            <span class="skill-chip">scikit-learn</span>
+            <span class="skill-chip">XGBoost</span>
+            <span class="skill-chip">pandas</span>
+            <span class="skill-chip">NumPy</span>
+            <span class="skill-chip">Matplotlib</span>
+            <span class="skill-chip">Flask</span>
+            <span class="skill-chip">HTML / CSS / JS</span>
+          </div>
+        </div>
+
+        <!-- Other -->
+        <div class="skill-group reveal reveal-delay-1">
+          <h3>Other</h3>
+          <div class="skill-chips">
+            <span class="skill-chip">Git</span>
+            <span class="skill-chip">Linux (Ubuntu)</span>
+            <span class="skill-chip">LaTeX</span>
+            <span class="skill-chip">Adobe Lightroom</span>
+            <span class="skill-chip">Photography</span>
+            <span class="skill-chip">Figma (basics)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFICIENCY BARS -->
+  <section class="section" aria-labelledby="prof-heading">
+    <div class="container" style="max-width:720px;">
+      <p class="eyebrow reveal">03 — Proficiency</p>
+      <h2 class="h2 mb-48 reveal reveal-delay-1">Self-assessed <span class="serif-em">depth</span></h2>
+
+      <div class="reveal" id="proficiencyList">
+        <div class="proficiency-row"><span class="proficiency-label">Physical Design</span><div class="proficiency-bar-wrap"><div class="proficiency-bar" data-pct="88"></div></div><span class="proficiency-pct">88%</span></div>
+        <div class="proficiency-row"><span class="proficiency-label">Verilog / SV</span><div class="proficiency-bar-wrap"><div class="proficiency-bar" data-pct="82"></div></div><span class="proficiency-pct">82%</span></div>
+        <div class="proficiency-row"><span class="proficiency-label">TCL Scripting</span><div class="proficiency-bar-wrap"><div class="proficiency-bar" data-pct="78"></div></div><span class="proficiency-pct">78%</span></div>
+        <div class="proficiency-row"><span class="proficiency-label">Python</span><div class="proficiency-bar-wrap"><div class="proficiency-bar" data-pct="80"></div></div><span class="proficiency-pct">80%</span></div>
+        <div class="proficiency-row"><span class="proficiency-label">ML / Data Science</span><div class="proficiency-bar-wrap"><div class="proficiency-bar" data-pct="70"></div></div><span class="proficiency-pct">70%</span></div>
+        <div class="proficiency-row"><span class="proficiency-label">STA Analysis</span><div class="proficiency-bar-wrap"><div class="proficiency-bar" data-pct="74"></div></div><span class="proficiency-pct">74%</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <h2 class="footer-cta-headline">Let's build something that <span class="serif-em">tapes out.</span></h2>
+    <a class="btn-primary" href="contact.html" style="background:var(--lime-400);color:var(--ink);box-shadow:none;">
+      <span class="arrow">→</span> Get in Touch
+    </a>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <a class="logo" href="index.html" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:24px;color:rgba(255,255,255,.7);">Azaan</a>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <p class="footer-copy">Designed &amp; built by Azaan · 2025</p>
+      <button class="back-to-top" aria-label="Back to top">↑</button>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// Animate proficiency bars on scroll
+(function () {
+  const bars = document.querySelectorAll('.proficiency-bar[data-pct]');
+  const obs  = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.pct + '%';
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(b => obs.observe(b));
+})();
+</script>
+</body>
+</html>

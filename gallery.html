@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Azaan</title>
+  <meta name="description" content="Photography gallery by Azaan — Photography Head at SAHITI, VIT Vellore." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .gallery-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
+    .gallery-filter-chip {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+      padding: 7px 18px; border-radius: var(--r-pill);
+      border: 1px solid var(--line); background: white; color: var(--ink-2);
+      cursor: pointer; transition: background var(--dur-ui), color var(--dur-ui), border-color var(--dur-ui);
+    }
+    .gallery-filter-chip.active, .gallery-filter-chip:hover { background: var(--ink); color: white; border-color: var(--ink); }
+
+    .gallery-masonry {
+      columns: 3; column-gap: 16px;
+    }
+    @media (max-width: 1023px) { .gallery-masonry { columns: 2; } }
+    @media (max-width: 640px)  { .gallery-masonry { columns: 1; } }
+
+    .gallery-masonry-item {
+      break-inside: avoid; margin-bottom: 16px;
+      border-radius: var(--r-md); overflow: hidden;
+      background: var(--bg-soft); cursor: pointer; position: relative;
+    }
+    .gallery-masonry-item img { width: 100%; display: block; transition: transform var(--dur-reveal) var(--ease-out-expo); }
+    .gallery-masonry-item:hover img { transform: scale(1.03); }
+    .gallery-masonry-placeholder {
+      aspect-ratio: 4/3; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+      color: var(--ink-3); font-size: 12px; font-family: 'JetBrains Mono', monospace;
+    }
+    .gallery-masonry-item:nth-child(3n+2) .gallery-masonry-placeholder { aspect-ratio: 3/4; }
+    .gallery-masonry-item:nth-child(5n+1) .gallery-masonry-placeholder { aspect-ratio: 16/9; }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: rgba(14,15,12,.4);
+      display: flex; align-items: flex-end; padding: 16px;
+      opacity: 0; transition: opacity var(--dur-ui);
+    }
+    .gallery-masonry-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span { font-size: 12px; color: white; font-weight: 500; background: rgba(0,0,0,.4); padding: 4px 10px; border-radius: var(--r-pill); }
+  </style>
+</head>
+<body>
+<div class="progress-bar"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- MENU OVERLAY -->
+<!-- ═══ LUXURY EDITORIAL MENU OVERLAY ═══ -->
+<div class="menu-overlay" id="menuOverlay" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+  <div class="menu-overlay-container">
+    <!-- Overlay Header -->
+    <div class="menu-overlay-header">
+      <a class="logo" href="index.html">Azaan</a>
+      <button class="close-btn" id="closeMenu" aria-label="Close menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Overlay Body: 2 Columns -->
+    <div class="menu-overlay-body">
+      <!-- Left: Navigation Links -->
+      <div class="menu-nav-col">
+        <span class="menu-section-label">Navigation</span>
+        <nav class="menu-links" aria-label="Main navigation">
+          <a class="menu-link" href="index.html">
+            <span class="menu-link-num">01</span>
+            <span class="menu-link-text">Home</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="about.html">
+            <span class="menu-link-num">02</span>
+            <span class="menu-link-text">About</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="projects.html">
+            <span class="menu-link-num">03</span>
+            <span class="menu-link-text">Projects</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="skills.html">
+            <span class="menu-link-num">04</span>
+            <span class="menu-link-text">Skills &amp; Tools</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="experience.html">
+            <span class="menu-link-num">05</span>
+            <span class="menu-link-text">Experience</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="gallery.html">
+            <span class="menu-link-num">06</span>
+            <span class="menu-link-text">Gallery</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="contact.html">
+            <span class="menu-link-num">07</span>
+            <span class="menu-link-text">Contact</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Right: Info / Quick Connect Panel -->
+      <div class="menu-info-col">
+        <div class="menu-info-card">
+          <span class="menu-section-label">Current Focus</span>
+          <p class="menu-info-desc">B.Tech ECE @ VIT Vellore (CGPA 8.47). Specializing in VLSI Physical Design, RTL-to-GDS sign-off &amp; ML for EDA.</p>
+          <div class="menu-status-pill">
+            <span class="dot-wrap"><span class="dot-ring"></span><span class="dot-core"></span></span>
+            <span>Available for PD Roles — 2026</span>
+          </div>
+        </div>
+
+        <div class="menu-info-card">
+          <span class="menu-section-label">Direct Connect</span>
+          <div class="menu-contact-links">
+            <a href="mailto:azaanahamed.k@gmail.com" class="menu-contact-item">
+              <span class="contact-label">Email</span>
+              <span class="contact-val">azaanahamed.k@gmail.com</span>
+            </a>
+            <a href="https://linkedin.com/in/azaan" target="_blank" rel="noopener" class="menu-contact-item">
+              <span class="contact-label">LinkedIn</span>
+              <span class="contact-val">in/azaan</span>
+            </a>
+            <a href="https://github.com/azaan" target="_blank" rel="noopener" class="menu-contact-item">
+              <span class="contact-label">GitHub</span>
+              <span class="contact-val">github.com/azaan</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="menu-actions">
+          <a class="btn-primary" href="resume.html" style="font-size:13px;padding:12px 24px;">Download Resume ↓</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlay Footer Note -->
+    <div class="menu-overlay-footer-note">
+      <span>VLSI Physical Design Engineer</span>
+      <span>Designed &amp; Built by Azaan</span>
+      <span>Vellore / Chennai, India</span>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">Azaan</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="skills.html">Skills</a>
+      <a href="experience.html">Experience</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="menu-btn" id="openMenu" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Gallery</p>
+      <h1 class="h1 reveal">Through the <span class="serif-em">lens</span></h1>
+      <p class="reveal reveal-delay-1">Photography Head at SAHITI, VIT Vellore. This is how I see the world outside the terminal.</p>
+    </div>
+  </div>
+
+  <section class="section" aria-label="Photo gallery">
+    <div class="container">
+
+      <!-- Filter chips -->
+      <div class="gallery-filters reveal" role="group" aria-label="Filter photos by category">
+        <button class="gallery-filter-chip active" data-filter="all">All</button>
+        <button class="gallery-filter-chip" data-filter="portrait">Portraits</button>
+        <button class="gallery-filter-chip" data-filter="landscape">Landscapes</button>
+        <button class="gallery-filter-chip" data-filter="events">Events</button>
+        <button class="gallery-filter-chip" data-filter="street">Street</button>
+      </div>
+
+      <!-- Masonry grid — add real images here -->
+      <div class="gallery-masonry reveal" id="galleryGrid">
+
+        <div class="gallery-masonry-item" data-category="portrait">
+          <div class="gallery-masonry-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="8" width="24" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>TODO: photo 1<br>Portraits</span>
+          </div>
+          <div class="gallery-overlay"><span>Portrait</span></div>
+        </div>
+
+        <div class="gallery-masonry-item" data-category="landscape">
+          <div class="gallery-masonry-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="8" width="24" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>TODO: photo 2<br>Landscape</span>
+          </div>
+          <div class="gallery-overlay"><span>Landscape</span></div>
+        </div>
+
+        <div class="gallery-masonry-item" data-category="events">
+          <div class="gallery-masonry-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="8" width="24" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>TODO: photo 3<br>Events</span>
+          </div>
+          <div class="gallery-overlay"><span>Events</span></div>
+        </div>
+
+        <div class="gallery-masonry-item" data-category="street">
+          <div class="gallery-masonry-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="8" width="24" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>TODO: photo 4<br>Street</span>
+          </div>
+          <div class="gallery-overlay"><span>Street</span></div>
+        </div>
+
+        <div class="gallery-masonry-item" data-category="portrait">
+          <div class="gallery-masonry-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="8" width="24" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>TODO: photo 5</span>
+          </div>
+          <div class="gallery-overlay"><span>Portrait</span></div>
+        </div>
+
+        <div class="gallery-masonry-item" data-category="events">
+          <div class="gallery-masonry-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="8" width="24" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>TODO: photo 6<br>VIT Fest</span>
+          </div>
+          <div class="gallery-overlay"><span>Events</span></div>
+        </div>
+
+        <div class="gallery-masonry-item" data-category="landscape">
+          <div class="gallery-masonry-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="8" width="24" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>TODO: photo 7</span>
+          </div>
+          <div class="gallery-overlay"><span>Landscape</span></div>
+        </div>
+
+        <div class="gallery-masonry-item" data-category="street">
+          <div class="gallery-masonry-placeholder">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="8" width="24" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>TODO: photo 8</span>
+          </div>
+          <div class="gallery-overlay"><span>Street</span></div>
+        </div>
+
+      </div>
+
+      <p class="text-center reveal" style="margin-top:40px;font-size:14px;color:var(--ink-3);">
+        Add your photos by replacing the placeholder items with <code style="font-family:'JetBrains Mono',monospace;background:var(--bg-soft);padding:2px 6px;border-radius:4px;">&lt;img&gt;</code> tags and setting <code style="font-family:'JetBrains Mono',monospace;background:var(--bg-soft);padding:2px 6px;border-radius:4px;">data-src</code> for the lightbox.
+      </p>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <h2 class="footer-cta-headline">Let's build something that <span class="serif-em">tapes out.</span></h2>
+    <a class="btn-primary" href="contact.html" style="background:var(--lime-400);color:var(--ink);box-shadow:none;">
+      <span class="arrow">→</span> Get in Touch
+    </a>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <a class="logo" href="index.html" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:24px;color:rgba(255,255,255,.7);">Azaan</a>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <p class="footer-copy">Designed &amp; built by Azaan · 2025</p>
+      <button class="back-to-top" aria-label="Back to top">↑</button>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// Gallery filter
+document.querySelectorAll('.gallery-filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.gallery-filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    const val = chip.dataset.filter;
+    document.querySelectorAll('.gallery-masonry-item[data-category]').forEach(item => {
+      item.style.display = (val === 'all' || item.dataset.category === val) ? '' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>

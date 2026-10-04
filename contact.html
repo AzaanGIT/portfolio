@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Azaan</title>
+  <meta name="description" content="Get in touch with Azaan — VLSI Physical Design Engineer. Open to Physical Design roles." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    @media (max-width: 1023px) { .contact-grid { grid-template-columns: 1fr; gap: 48px; } }
+    .contact-info-block { position: sticky; top: 100px; }
+    .contact-info-block h2 { font-size: var(--text-h2); font-weight: 300; line-height: 1.1; letter-spacing: -0.015em; margin-bottom: 24px; }
+    .contact-info-block p { font-size: var(--text-body-lg); color: var(--ink-2); line-height: 1.65; margin-bottom: 40px; }
+    .contact-links { display: flex; flex-direction: column; gap: 16px; }
+    .contact-link-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px; background: var(--bg-soft);
+      border-radius: var(--r-md); border: 1px solid var(--line);
+      transition: border-color var(--dur-ui), background var(--dur-ui);
+    }
+    .contact-link-row:hover { border-color: var(--lime-400); background: var(--lime-50); }
+    .contact-link-icon {
+      width: 40px; height: 40px; border-radius: var(--r-sm);
+      background: white; border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .contact-link-row .label { font-size: 11px; color: var(--ink-3); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .06em; }
+    .contact-link-row .value { font-size: 15px; font-weight: 500; color: var(--ink); }
+
+    /* Form styles are in style.css */
+    .form-card { background: var(--bg-soft); border-radius: var(--r-lg); padding: 40px; }
+    .form-card h3 { font-size: 1.4rem; font-weight: 500; margin-bottom: 32px; letter-spacing: -0.01em; }
+    .honeypot { display: none !important; }
+    .form-success { display: none; text-align: center; padding: 40px 20px; }
+    .form-success .icon { font-size: 48px; margin-bottom: 16px; }
+    .form-success h4 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
+    .form-success p { font-size: 14px; color: var(--ink-2); }
+  </style>
+</head>
+<body>
+<div class="progress-bar"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- MENU OVERLAY -->
+<!-- ═══ LUXURY EDITORIAL MENU OVERLAY ═══ -->
+<div class="menu-overlay" id="menuOverlay" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+  <div class="menu-overlay-container">
+    <!-- Overlay Header -->
+    <div class="menu-overlay-header">
+      <a class="logo" href="index.html">Azaan</a>
+      <button class="close-btn" id="closeMenu" aria-label="Close menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Overlay Body: 2 Columns -->
+    <div class="menu-overlay-body">
+      <!-- Left: Navigation Links -->
+      <div class="menu-nav-col">
+        <span class="menu-section-label">Navigation</span>
+        <nav class="menu-links" aria-label="Main navigation">
+          <a class="menu-link" href="index.html">
+            <span class="menu-link-num">01</span>
+            <span class="menu-link-text">Home</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="about.html">
+            <span class="menu-link-num">02</span>
+            <span class="menu-link-text">About</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="projects.html">
+            <span class="menu-link-num">03</span>
+            <span class="menu-link-text">Projects</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="skills.html">
+            <span class="menu-link-num">04</span>
+            <span class="menu-link-text">Skills &amp; Tools</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="experience.html">
+            <span class="menu-link-num">05</span>
+            <span class="menu-link-text">Experience</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="gallery.html">
+            <span class="menu-link-num">06</span>
+            <span class="menu-link-text">Gallery</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="contact.html">
+            <span class="menu-link-num">07</span>
+            <span class="menu-link-text">Contact</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Right: Info / Quick Connect Panel -->
+      <div class="menu-info-col">
+        <div class="menu-info-card">
+          <span class="menu-section-label">Current Focus</span>
+          <p class="menu-info-desc">B.Tech ECE @ VIT Vellore (CGPA 8.47). Specializing in VLSI Physical Design, RTL-to-GDS sign-off &amp; ML for EDA.</p>
+          <div class="menu-status-pill">
+            <span class="dot-wrap"><span class="dot-ring"></span><span class="dot-core"></span></span>
+            <span>Available for PD Roles — 2026</span>
+          </div>
+        </div>
+
+        <div class="menu-info-card">
+          <span class="menu-section-label">Direct Connect</span>
+          <div class="menu-contact-links">
+            <a href="mailto:azaanahamed.k@gmail.com" class="menu-contact-item">
+              <span class="contact-label">Email</span>
+              <span class="contact-val">azaanahamed.k@gmail.com</span>
+            </a>
+            <a href="https://linkedin.com/in/azaan" target="_blank" rel="noopener" class="menu-contact-item">
+              <span class="contact-label">LinkedIn</span>
+              <span class="contact-val">in/azaan</span>
+            </a>
+            <a href="https://github.com/azaan" target="_blank" rel="noopener" class="menu-contact-item">
+              <span class="contact-label">GitHub</span>
+              <span class="contact-val">github.com/azaan</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="menu-actions">
+          <a class="btn-primary" href="resume.html" style="font-size:13px;padding:12px 24px;">Download Resume ↓</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlay Footer Note -->
+    <div class="menu-overlay-footer-note">
+      <span>VLSI Physical Design Engineer</span>
+      <span>Designed &amp; Built by Azaan</span>
+      <span>Vellore / Chennai, India</span>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">Azaan</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="skills.html">Skills</a>
+      <a href="experience.html">Experience</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <button class="menu-btn" id="openMenu" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Contact</p>
+      <h1 class="h1 reveal">Let's <span class="serif-em">talk</span></h1>
+      <p class="reveal reveal-delay-1">Open to Physical Design Engineer roles — 2025/2026. Always happy to discuss VLSI, EDA, or photography.</p>
+    </div>
+  </div>
+
+  <section class="section" aria-label="Contact section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Info block -->
+        <div class="contact-info-block reveal">
+          <h2>Get in <span class="serif-em">touch</span></h2>
+          <p>Whether you have a role in Physical Design, want to talk about RTL-to-GDS flows, or just want to connect — my inbox is open.</p>
+
+          <div class="contact-links">
+            <a class="contact-link-row" href="mailto:azaanahamed.k@gmail.com">
+              <div class="contact-link-icon">✉</div>
+              <div>
+                <div class="label">Email</div>
+                <div class="value">azaanahamed.k@gmail.com</div>
+              </div>
+            </a>
+            <a class="contact-link-row" href="https://linkedin.com/in/azaan" target="_blank" rel="noopener">
+              <div class="contact-link-icon">in</div>
+              <div>
+                <div class="label">LinkedIn</div>
+                <div class="value">linkedin.com/in/azaan</div>
+              </div>
+            </a>
+            <a class="contact-link-row" href="https://github.com/azaan" target="_blank" rel="noopener">
+              <div class="contact-link-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85.004 1.71.115 2.51.337 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/></svg>
+              </div>
+              <div>
+                <div class="label">GitHub</div>
+                <div class="value">github.com/azaan</div>
+              </div>
+            </a>
+            <div class="contact-link-row" style="cursor:default;">
+              <div class="contact-link-icon">📍</div>
+              <div>
+                <div class="label">Location</div>
+                <div class="value">Vellore / Chennai, India</div>
+              </div>
+            </div>
+            <div class="contact-link-row" style="cursor:default;">
+              <div class="contact-link-icon" style="background:var(--lime-50);border-color:var(--lime-200);">
+                <div style="width:8px;height:8px;border-radius:50%;background:var(--lime-400);"></div>
+              </div>
+              <div>
+                <div class="label">Status</div>
+                <div class="value">Open to PD roles — 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="form-card reveal reveal-delay-1">
+          <h3>Send a message</h3>
+          <form id="contactForm" novalidate>
+            <!-- Honeypot spam field -->
+            <div class="honeypot" aria-hidden="true">
+              <label>Do not fill this out: <input type="text" name="_trap" tabindex="-1" autocomplete="off" /></label>
+            </div>
+
+            <div class="form-group">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" placeholder="Recruiter / Engineer / Anyone" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" placeholder="you@company.com" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Physical Design role / Collaboration / Hi" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about the role, your project, or anything else." required></textarea>
+            </div>
+            <button class="btn-primary" type="submit" style="width:100%;justify-content:center;">
+              Send Message <span class="arrow">→</span>
+            </button>
+          </form>
+
+          <!-- Success state -->
+          <div class="form-success" id="formSuccess">
+            <div class="icon">✓</div>
+            <h4>Message sent!</h4>
+            <p>Thanks for reaching out. I'll reply within 24 hours.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-divider" style="margin-top:0;"></div>
+    <div class="footer-bottom">
+      <a class="logo" href="index.html" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:24px;color:rgba(255,255,255,.7);">Azaan</a>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="experience.html">Experience</a>
+      </div>
+      <p class="footer-copy">Designed &amp; built by Azaan · 2025</p>
+      <button class="back-to-top" aria-label="Back to top">↑</button>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// Enhanced form with success state
+(function () {
+  const form    = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  if (!form) return;
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    // Check honeypot
+    if (form._trap && form._trap.value) return;
+
+    const btn = form.querySelector('[type="submit"]');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      form.style.display = 'none';
+      success.style.display = 'block';
+    }, 1200);
+  });
+})();
+</script>
+</body>
+</html>

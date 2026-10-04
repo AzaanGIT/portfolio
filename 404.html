@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Route Not Found · Azaan</title>
+  <meta name="description" content="Page not found." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      min-height: 100svh;
+      display: flex; flex-direction: column;
+      background:
+        radial-gradient(50% 50% at 50% 50%, rgba(201,169,138,.14) 0%, rgba(253,252,251,0) 100%),
+        linear-gradient(135deg, #fdfcfb 0%, #f5eee8 100%);
+    }
+    .notfound {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: clamp(80px, 12vw, 160px) clamp(20px, 4vw, 48px);
+      text-align: center;
+    }
+    .notfound-inner { max-width: 560px; }
+    .chip-art {
+      margin: 0 auto 40px;
+      width: 160px; height: 160px;
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-lg);
+      background: var(--bg-soft);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    /* Chip pins */
+    .chip-art::before, .chip-art::after {
+      content: '';
+      position: absolute;
+      background: var(--line);
+    }
+    .chip-art::before { width: 140px; height: 1px; top: 50%; left: 10px; }
+    .chip-art::after  { width: 1px; height: 140px; left: 50%; top: 10px; }
+    .chip-label {
+      position: relative; z-index: 1;
+      background: var(--bg);
+      padding: 8px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-sm);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500; color: var(--ink-3);
+      letter-spacing: 0.05em;
+    }
+    /* Pin decorations */
+    .pin {
+      position: absolute;
+      width: 8px; height: 20px;
+      background: var(--line);
+      border-radius: 2px;
+    }
+    .pin-l { left: -8px; }
+    .pin-r { right: -8px; }
+    .pin-t { top: -8px; width: 20px; height: 8px; }
+    .pin-b { bottom: -8px; width: 20px; height: 8px; }
+    .pin-1 { top: 30px; }
+    .pin-2 { top: 56px; }
+    .pin-3 { top: 82px; }
+    .pin-4 { top: 108px; }
+    .pin-t-1 { left: 30px; }
+    .pin-t-2 { left: 56px; }
+    .pin-t-3 { left: 82px; }
+    .pin-t-4 { left: 108px; }
+
+    .error-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: .08em;
+      color: var(--lime-500); margin-bottom: 16px; text-transform: uppercase;
+    }
+    .notfound-title {
+      font-family: 'Urbanist', system-ui, sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 16px;
+    }
+    .notfound-sub { font-size: var(--text-body-lg); color: var(--ink-2); line-height: 1.6; margin-bottom: 40px; }
+    .notfound-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">Azaan</a>
+    <button class="menu-btn" id="openMenu" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MENU OVERLAY -->
+<!-- ═══ LUXURY EDITORIAL MENU OVERLAY ═══ -->
+<div class="menu-overlay" id="menuOverlay" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+  <div class="menu-overlay-container">
+    <!-- Overlay Header -->
+    <div class="menu-overlay-header">
+      <a class="logo" href="index.html">Azaan</a>
+      <button class="close-btn" id="closeMenu" aria-label="Close menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Overlay Body: 2 Columns -->
+    <div class="menu-overlay-body">
+      <!-- Left: Navigation Links -->
+      <div class="menu-nav-col">
+        <span class="menu-section-label">Navigation</span>
+        <nav class="menu-links" aria-label="Main navigation">
+          <a class="menu-link" href="index.html">
+            <span class="menu-link-num">01</span>
+            <span class="menu-link-text">Home</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="about.html">
+            <span class="menu-link-num">02</span>
+            <span class="menu-link-text">About</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="projects.html">
+            <span class="menu-link-num">03</span>
+            <span class="menu-link-text">Projects</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="skills.html">
+            <span class="menu-link-num">04</span>
+            <span class="menu-link-text">Skills &amp; Tools</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="experience.html">
+            <span class="menu-link-num">05</span>
+            <span class="menu-link-text">Experience</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="gallery.html">
+            <span class="menu-link-num">06</span>
+            <span class="menu-link-text">Gallery</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+          <a class="menu-link" href="contact.html">
+            <span class="menu-link-num">07</span>
+            <span class="menu-link-text">Contact</span>
+            <span class="menu-link-arrow">→</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Right: Info / Quick Connect Panel -->
+      <div class="menu-info-col">
+        <div class="menu-info-card">
+          <span class="menu-section-label">Current Focus</span>
+          <p class="menu-info-desc">B.Tech ECE @ VIT Vellore (CGPA 8.47). Specializing in VLSI Physical Design, RTL-to-GDS sign-off &amp; ML for EDA.</p>
+          <div class="menu-status-pill">
+            <span class="dot-wrap"><span class="dot-ring"></span><span class="dot-core"></span></span>
+            <span>Available for PD Roles — 2026</span>
+          </div>
+        </div>
+
+        <div class="menu-info-card">
+          <span class="menu-section-label">Direct Connect</span>
+          <div class="menu-contact-links">
+            <a href="mailto:azaanahamed.k@gmail.com" class="menu-contact-item">
+              <span class="contact-label">Email</span>
+              <span class="contact-val">azaanahamed.k@gmail.com</span>
+            </a>
+            <a href="https://linkedin.com/in/azaan" target="_blank" rel="noopener" class="menu-contact-item">
+              <span class="contact-label">LinkedIn</span>
+              <span class="contact-val">in/azaan</span>
+            </a>
+            <a href="https://github.com/azaan" target="_blank" rel="noopener" class="menu-contact-item">
+              <span class="contact-label">GitHub</span>
+              <span class="contact-val">github.com/azaan</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="menu-actions">
+          <a class="btn-primary" href="resume.html" style="font-size:13px;padding:12px 24px;">Download Resume ↓</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlay Footer Note -->
+    <div class="menu-overlay-footer-note">
+      <span>VLSI Physical Design Engineer</span>
+      <span>Designed &amp; Built by Azaan</span>
+      <span>Vellore / Chennai, India</span>
+    </div>
+  </div>
+</div>
+
+<main class="notfound" id="main" aria-label="404 error">
+  <div class="notfound-inner">
+    <!-- Chip art -->
+    <div class="chip-art" aria-hidden="true">
+      <!-- Left pins -->
+      <div class="pin pin-l pin-1"></div>
+      <div class="pin pin-l pin-2"></div>
+      <div class="pin pin-l pin-3"></div>
+      <div class="pin pin-l pin-4"></div>
+      <!-- Right pins -->
+      <div class="pin pin-r pin-1"></div>
+      <div class="pin pin-r pin-2"></div>
+      <div class="pin pin-r pin-3"></div>
+      <div class="pin pin-r pin-4"></div>
+      <!-- Top pins -->
+      <div class="pin pin-t pin-t-1"></div>
+      <div class="pin pin-t pin-t-2"></div>
+      <div class="pin pin-t pin-t-3"></div>
+      <div class="pin pin-t pin-t-4"></div>
+      <!-- Bottom pins -->
+      <div class="pin pin-b pin-t-1"></div>
+      <div class="pin pin-b pin-t-2"></div>
+      <div class="pin pin-b pin-t-3"></div>
+      <div class="pin pin-b pin-t-4"></div>
+      <div class="chip-label">AZAAN-404</div>
+    </div>
+
+    <p class="error-code">Error 0x404 — Route not found</p>
+    <h1 class="notfound-title">This <span class="serif-em">net</span> has no connection.</h1>
+    <p class="notfound-sub">
+      Looks like this route didn't make it through P&amp;R. 
+      The page you're looking for doesn't exist or was moved.
+    </p>
+    <div class="notfound-actions">
+      <a class="btn-primary" href="index.html"><span class="arrow">←</span> Back home</a>
+      <a class="btn-secondary" href="projects.html">View projects</a>
+    </div>
+  </div>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>
