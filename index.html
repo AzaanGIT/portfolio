@@ -296,33 +296,101 @@
     }
 
     @media (max-width: 767px) {
-      .greeting { white-space: normal; font-size: clamp(2.4rem, 10vw, 3.2rem); }
-      .role-line { font-size: clamp(2.8rem, 11vw, 3.6rem); }
-      .hero-portrait-wrap { width: 85vw; max-width: 360px; z-index: 2; }
-      .hero-portrait { max-height: 52svh; }
-      .avail-pill-hero {
+      .hero {
+        min-height: 100svh;
+        min-height: 100dvh;
+        padding-top: 68px;
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-badge {
+        margin-top: 4px;
+        font-size: 11.5px;
+      }
+      .hero-text {
+        margin-top: 6px;
+        padding: 0 16px;
+        z-index: 4;
+      }
+      .greeting {
+        white-space: normal;
+        font-size: clamp(1.9rem, 7.5vw, 2.6rem);
+        line-height: 1.08;
+      }
+      .role-line {
+        font-size: clamp(2.1rem, 8.5vw, 3rem);
+        line-height: 1.12;
+        margin-top: 2px;
+        min-height: 1.15em;
+      }
+      .hero-portrait-wrap {
+        width: 82vw;
+        max-width: 330px;
+        bottom: 0;
         left: 50%;
-        top: auto;
-        bottom: calc(52svh + 48px);
         transform: translateX(-50%);
-        width: calc(100% - 40px);
+        z-index: 2;
+        pointer-events: none;
+      }
+      .hero-portrait {
+        max-height: 48svh;
+        -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+      }
+      .hero-chrome {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        z-index: 6;
+        pointer-events: none;
+        margin-top: 14px;
+      }
+      .avail-pill-hero {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        transform: none;
+        width: calc(100% - 32px);
         max-width: 340px;
-        padding: 11px 15px;
+        padding: 10px 14px;
+        pointer-events: auto;
       }
       .avail-pill-hero:hover {
-        transform: translateX(-50%) translateY(-2px);
+        transform: translateY(-2px);
+      }
+      .focus-title {
+        font-size: 12.5px;
+        line-height: 1.32;
+      }
+      .hero-focus-meta {
+        font-size: 9.5px;
+        gap: 5px;
       }
       .tagline-hero { display: none; }
+      .social-proof { display: none; }
       .cta-btn-hero {
-        left: 50%; right: auto;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        right: auto;
         transform: translateX(-50%);
         width: calc(100% - 48px);
-        max-width: 320px;
+        max-width: 300px;
         justify-content: center;
-        bottom: 24px;
+        padding: 12px 24px;
+        font-size: 14px;
+        z-index: 10;
+        pointer-events: auto;
       }
       .cta-btn-hero:hover { transform: translateX(-50%) translateY(-2px); }
-      .social-proof { display: none; }
     }
 
     /* Navbar — fully transparent on homepage so hero shows through */
