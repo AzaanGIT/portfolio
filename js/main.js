@@ -253,10 +253,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const roleEl = document.getElementById('roleText');
   if (roleEl) {
     initTypewriter(roleEl, [
-      'Physical Design Engineer',
-      'VLSI Designer',
+      'ECE Student & Innovator',
+      'Embedded Systems Builder',
+      'ML & EDA Explorer',
+      'Robotics & Hardware Creator',
       'RTL-to-GDS Enthusiast',
-      'ML for EDA Explorer',
     ]);
   }
 });
