@@ -10,10 +10,10 @@
   <link rel="stylesheet" href="css/style.css" />
   <style>
     .about-split {
-      display: grid;
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 36px;
-      align-items: start;
+      align-items: center;
     }
 
     .about-photo {
@@ -27,15 +27,22 @@
       max-width: 380px;
       margin: 0 auto;
       width: 100%;
+      position: static !important;
+    }
+
+    .about-content {
+      width: 100%;
     }
 
     @media (min-width: 1024px) {
       .about-split {
+        display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 80px;
+        align-items: start;
       }
       .about-photo {
-        position: sticky;
+        position: sticky !important;
         top: 100px;
         max-width: none;
         margin: 0;

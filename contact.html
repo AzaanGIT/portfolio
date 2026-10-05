@@ -7,15 +7,18 @@
   <meta name="description" content="Get in touch with Azaan — ECE student at VIT Vellore. Open to VLSI and embedded engineering roles." />
   <link rel="stylesheet" href="css/style.css" />
   <style>
-    .contact-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start; }
-    .contact-info-block { position: static; }
-    @media (min-width: 1024px) {
-      .contact-grid { grid-template-columns: 1fr 1fr; gap: 80px; }
-      .contact-info-block { position: sticky; top: 100px; }
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .contact-info-block {
+      position: static !important;
+      width: 100%;
     }
     .contact-info-block h2 { font-size: var(--text-h2); font-weight: 300; line-height: 1.1; letter-spacing: -0.015em; margin-bottom: 24px; }
-    .contact-info-block p { font-size: var(--text-body-lg); color: var(--ink-2); line-height: 1.65; margin-bottom: 40px; }
-    .contact-links { display: flex; flex-direction: column; gap: 16px; }
+    .contact-info-block p { font-size: var(--text-body-lg); color: var(--ink-2); line-height: 1.65; margin-bottom: 32px; }
+    .contact-links { display: flex; flex-direction: column; gap: 14px; }
     .contact-link-row {
       display: flex; align-items: center; gap: 14px;
       padding: 16px 20px; background: var(--bg-soft);
@@ -32,14 +35,36 @@
     .contact-link-row .label { font-size: 11px; color: var(--ink-3); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .06em; }
     .contact-link-row .value { font-size: 15px; font-weight: 500; color: var(--ink); }
 
-    /* Form styles are in style.css */
-    .form-card { background: var(--bg-soft); border-radius: var(--r-lg); padding: 40px; }
-    .form-card h3 { font-size: 1.4rem; font-weight: 500; margin-bottom: 32px; letter-spacing: -0.01em; }
+    /* Form styles */
+    .form-card {
+      background: var(--bg-soft);
+      border-radius: var(--r-lg);
+      padding: 28px 20px;
+      width: 100%;
+      border: 1px solid var(--line);
+    }
+    .form-card h3 { font-size: 1.4rem; font-weight: 500; margin-bottom: 28px; letter-spacing: -0.01em; }
     .honeypot { display: none !important; }
     .form-success { display: none; text-align: center; padding: 40px 20px; }
     .form-success .icon { font-size: 48px; margin-bottom: 16px; }
     .form-success h4 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
     .form-success p { font-size: 14px; color: var(--ink-2); }
+
+    @media (min-width: 1024px) {
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: start;
+      }
+      .contact-info-block {
+        position: sticky !important;
+        top: 100px;
+      }
+      .form-card {
+        padding: 40px;
+      }
+    }
   </style>
 </head>
 <body>
