@@ -8,8 +8,11 @@
   <link rel="stylesheet" href="css/style.css" />
   <style>
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    @media (max-width: 1023px) { .contact-grid { grid-template-columns: 1fr; gap: 48px; } }
     .contact-info-block { position: sticky; top: 100px; }
+    @media (max-width: 1023px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .contact-info-block { position: static; }
+    }
     .contact-info-block h2 { font-size: var(--text-h2); font-weight: 300; line-height: 1.1; letter-spacing: -0.015em; margin-bottom: 24px; }
     .contact-info-block p { font-size: var(--text-body-lg); color: var(--ink-2); line-height: 1.65; margin-bottom: 40px; }
     .contact-links { display: flex; flex-direction: column; gap: 16px; }
