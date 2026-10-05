@@ -66,19 +66,6 @@ Through rigorous academic projects and practical industry internships, I bring a
 
 ---
 
-## 📈 GitHub Activity & Stats
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=AzaanGIT&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" width="48%" alt="GitHub Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AzaanGIT&layout=compact&theme=tokyonight&hide_border=true" width="48%" alt="Top Languages" />
-</p>
-
-<p align="center">
-  <img src="https://streak-stats.demolab.com?user=AzaanGIT&theme=tokyonight&hide_border=true" width="96%" alt="GitHub Streak" />
-</p>
-
----
-
 ## 📬 Get in Touch
 
 - 💼 **LinkedIn**: [linkedin.com/in/azaanahamedk](https://linkedin.com/in/azaanahamedk)
