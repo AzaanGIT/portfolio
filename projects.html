@@ -6,40 +6,192 @@
   <title>Projects — Azaan</title>
   <meta name="description" content="Projects by Azaan — VLSI Physical Design, ML for EDA, Embedded Systems and more." />
   <link rel="stylesheet" href="css/style.css" />
-  <style>
+    <style>
+    /* Filter Bar Styling */
+    .filter-wrapper {
+      margin-bottom: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .filter-group-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .filter-group-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-3);
+      width: 110px;
+      flex-shrink: 0;
+    }
     .filter-chips {
-      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px;
+      display: flex; gap: 8px; flex-wrap: wrap;
     }
     .filter-chip {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13px; font-weight: 500;
-      padding: 8px 20px;
+      font-size: 12px; font-weight: 500;
+      padding: 7px 16px;
       border-radius: var(--r-pill);
       border: 1px solid var(--line);
-      background: white; color: var(--ink-2);
+      background: var(--bg); color: var(--ink-2);
       cursor: pointer;
-      transition: background var(--dur-ui), color var(--dur-ui), border-color var(--dur-ui);
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: background var(--dur-ui), color var(--dur-ui), border-color var(--dur-ui), transform 150ms;
     }
-    .filter-chip.active, .filter-chip:hover {
-      background: var(--ink); color: white; border-color: var(--ink);
-    }
-    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
-    @media (max-width: 767px) { .projects-grid { grid-template-columns: 1fr; } }
-
-    /* Case study card variant */
-    .project-card-full .project-card-media { aspect-ratio: 16/9; }
-    .project-card-full .project-card-body h3 { font-size: 1.4rem; }
-    .project-card-full .project-card-body p { font-size: var(--text-body); }
-
-    .project-detail {
-      display: none;
-      grid-column: 1 / -1;
+    .filter-chip:hover {
       background: var(--bg-soft);
-      border-radius: var(--r-lg);
-      padding: 48px;
+      border-color: var(--lime-400);
+      transform: translateY(-1px);
     }
-    .project-detail.open { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-    @media (max-width: 767px) { .project-detail.open { grid-template-columns: 1fr; } }
+    .filter-chip.active {
+      background: var(--ink); color: white; border-color: var(--ink);
+      box-shadow: 0 4px 14px rgba(14,15,12,.18);
+    }
+    .filter-chip .count {
+      font-size: 10px; opacity: 0.65;
+      background: rgba(0,0,0,0.06); padding: 1px 6px; border-radius: 10px;
+    }
+    .filter-chip.active .count {
+      background: rgba(255,255,255,0.22);
+      opacity: 0.9;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    @media (max-width: 900px) {
+      .projects-grid { grid-template-columns: 1fr; gap: 24px; }
+      .filter-group-label { width: 100%; margin-bottom: -4px; }
+    }
+
+    /* Project Card Additions */
+    .project-card {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--dur-reveal) var(--ease-out-expo), box-shadow var(--dur-reveal) var(--ease-out-expo), border-color 200ms;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(58,53,48,.10);
+      border-color: var(--lime-400);
+    }
+    .project-card-media {
+      aspect-ratio: 16/9;
+      background: var(--bg-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+    .project-card-media .placeholder-art {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink-3);
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .project-card-body {
+      padding: 24px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .project-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .badge-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge-type {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 9px;
+      border-radius: var(--r-sm);
+      background: var(--bg-soft);
+      color: var(--ink-2);
+      border: 1px solid var(--line);
+    }
+    .badge-type.badge-case-study {
+      background: #F4EFEA;
+      color: #5A4738;
+      border-color: #E2D1C3;
+    }
+    .badge-diff {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--r-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .badge-diff.badge-hard {
+      background: #FBF0E8;
+      color: #9C4119;
+      border: 1px solid rgba(156,65,25,0.25);
+    }
+    .badge-diff.badge-medium {
+      background: #EFF3E8;
+      color: #4D6828;
+      border: 1px solid rgba(77,104,40,0.25);
+    }
+    .project-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-3);
+    }
+    .project-title {
+      font-size: 1.28rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+      margin-bottom: 12px;
+    }
+    .project-card-body .tag-row {
+      display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px;
+    }
+    .project-desc {
+      font-size: 14px;
+      color: var(--ink-2);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .project-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
   </style>
 </head>
 <body>
@@ -175,135 +327,520 @@
     </div>
   </div>
 
-  <section class="section" aria-label="Project list">
+    <section class="section" aria-label="Project list">
     <div class="container">
-      <!-- Filters -->
-      <div class="filter-chips reveal" role="group" aria-label="Filter projects by category">
-        <button class="filter-chip active" data-filter="all">All</button>
-        <button class="filter-chip" data-filter="physical-design">Physical Design</button>
-        <button class="filter-chip" data-filter="ml-eda">ML for EDA</button>
-        <button class="filter-chip" data-filter="embedded">Embedded</button>
-        <button class="filter-chip" data-filter="web">Web</button>
+      
+      <!-- Multi-tier Filter System -->
+      <div class="filter-wrapper reveal" role="region" aria-label="Project and case study filters">
+        
+        <!-- Row 1: Classification & Difficulty -->
+        <div class="filter-group-row">
+          <span class="filter-group-label">Category:</span>
+          <div class="filter-chips">
+            <button class="filter-chip active" data-filter="all">All <span class="count">16</span></button>
+            <button class="filter-chip" data-filter="project">Projects <span class="count">10</span></button>
+            <button class="filter-chip" data-filter="case-study">Case Studies <span class="count">6</span></button>
+            <button class="filter-chip" data-filter="hard">Hard Complexity <span class="count">9</span></button>
+            <button class="filter-chip" data-filter="medium">Medium Complexity <span class="count">7</span></button>
+          </div>
+        </div>
+
+        <!-- Row 2: Domains -->
+        <div class="filter-group-row">
+          <span class="filter-group-label">Domain:</span>
+          <div class="filter-chips">
+            <button class="filter-chip" data-filter="vlsi">VLSI &amp; Digital</button>
+            <button class="filter-chip" data-filter="embedded">Embedded &amp; IoT</button>
+            <button class="filter-chip" data-filter="robotics">Robotics</button>
+            <button class="filter-chip" data-filter="ml">ML &amp; AI</button>
+            <button class="filter-chip" data-filter="rf">RF, Comms &amp; Optics</button>
+          </div>
+        </div>
+
       </div>
 
+      <!-- Projects Grid -->
       <div class="projects-grid">
 
-        <!-- Project 1 -->
-        <article class="project-card project-card-full reveal" data-category="physical-design" aria-label="SPI Controller project">
+        <article class="project-card project-card-full reveal" data-tags="project hard vlsi ml" aria-label="ML-Based Routing & Congestion Predictor for RV32I Processor">
           <div class="project-card-media">
             <div class="placeholder-art">
-              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-                <rect x="8" y="12" width="48" height="40" rx="4" stroke="currentColor" stroke-width="1.5"/>
-                <line x1="16" y1="24" x2="48" y2="24" stroke="currentColor" stroke-width="1.5"/>
-                <line x1="16" y1="32" x2="40" y2="32" stroke="currentColor" stroke-width="1.5"/>
-                <line x1="16" y1="40" x2="44" y2="40" stroke="currentColor" stroke-width="1.5"/>
-                <rect x="28" y="4" width="8" height="10" rx="2" fill="currentColor" opacity=".2"/>
-              </svg>
-              <span>TODO: add GDS layout screenshot</span>
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect x="8" y="12" width="48" height="40" rx="4" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="24" x2="48" y2="24" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="32" x2="40" y2="32" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="40" x2="44" y2="40" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="28" y="4" width="8" height="10" rx="2" fill="currentColor" opacity=".2"/>
+        </svg>
+              <span>Project · Hard</span>
             </div>
             <div class="view-circle">↗</div>
           </div>
           <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-project">Project</span>
+                <span class="badge-diff badge-hard">● Hard</span>
+              </div>
+              <span class="project-period">Aug 2026 – Present (Ongoing)</span>
+            </div>
+            <h3 class="project-title">ML-Based Routing & Congestion Predictor for RV32I Processor</h3>
             <div class="tag-row">
-              <span class="tag">Physical Design</span>
-              <span class="tag">Qflow</span>
-              <span class="tag">Yosys</span>
-              <span class="tag">OpenSTA</span>
-              <span class="tag">Verilog HDL</span>
+              <span class="tag">VLSI Design</span><span class="tag">ML for EDA</span><span class="tag">Cadence</span><span class="tag">OpenROAD</span><span class="tag">Gradient Boosting</span>
             </div>
-            <h3>Physical Design of SPI using Qflow</h3>
-            <p>Implemented complete RTL-to-GDSII physical design flow for an SPI module using the Qflow EDA toolchain. Covered logical synthesis (Yosys), placement, routing, timing analysis (OpenSTA), DRC, LVS, and final GDSII generation. May 2026 – Jul 2026.</p>
-            <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
-              <a class="btn-primary" href="#" style="font-size:13px;padding:10px 20px;">View Case Study <span class="arrow">→</span></a>
-              <a class="btn-secondary" href="#" style="font-size:13px;padding:9px 20px;">GitHub</a>
-            </div>
+            <p class="project-desc">Developing an end-to-end machine learning model to predict routing congestion in an RV32I RISC-V processor during RTL-to-GDSII physical implementation. Analyzes a custom 30,500+ row dataset extracted from Cadence sweeps, detecting congestion hotspots early and recommending parameter adjustments before routing failure.</p>
+            <div class="project-actions-row"><a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
           </div>
         </article>
 
-        <!-- Project 2 -->
-        <article class="project-card project-card-full reveal reveal-delay-1" data-category="ml-eda" aria-label="RV32I Congestion Predictor project">
+        <article class="project-card project-card-full reveal" data-tags="project hard vlsi" aria-label="Physical Design of Serial Peripheral Interface (SPI) using Qflow">
           <div class="project-card-media">
             <div class="placeholder-art">
-              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-                <rect x="4" y="4" width="56" height="56" rx="4" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M4 44 L16 28 L28 36 L42 16 L60 24" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                <circle cx="42" cy="16" r="3" fill="currentColor" opacity=".4"/>
-              </svg>
-              <span>TODO: add heatmap / web UI screenshot</span>
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect x="8" y="12" width="48" height="40" rx="4" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="24" x2="48" y2="24" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="32" x2="40" y2="32" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="40" x2="44" y2="40" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="28" y="4" width="8" height="10" rx="2" fill="currentColor" opacity=".2"/>
+        </svg>
+              <span>Project · Hard</span>
             </div>
             <div class="view-circle">↗</div>
           </div>
           <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-project">Project</span>
+                <span class="badge-diff badge-hard">● Hard</span>
+              </div>
+              <span class="project-period">May 2026 – Jul 2026</span>
+            </div>
+            <h3 class="project-title">Physical Design of Serial Peripheral Interface (SPI) using Qflow</h3>
             <div class="tag-row">
-              <span class="tag">ML for EDA</span>
-              <span class="tag">Cadence</span>
-              <span class="tag">OpenROAD</span>
-              <span class="tag">Gradient Boosting</span>
-              <span class="tag">Google Colab</span>
+              <span class="tag">Physical Design</span><span class="tag">Qflow</span><span class="tag">Yosys</span><span class="tag">OpenSTA</span><span class="tag">Verilog HDL</span>
             </div>
-            <h3>ML-Based Routing &amp; Congestion Predictor for RV32I Processor</h3>
-            <p>Developing an ML model to predict routing congestion in an RV32I processor during the RTL-to-GDSII flow. Congestion is a major cause of delays — the model predicts it early and recommends parameter changes. Uses Cadence (Virtuoso, Innovus, Genus), OpenROAD dataset, and Gradient Boosting. Aug 2026 – Present.</p>
-            <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
-              <a class="btn-primary" href="#" style="font-size:13px;padding:10px 20px;">View Case Study <span class="arrow">→</span></a>
-              <a class="btn-secondary" href="#" style="font-size:13px;padding:9px 20px;">GitHub</a>
-            </div>
+            <p class="project-desc">Executed complete RTL-to-GDSII ASIC implementation flow for an SPI master/slave module using the open-source Qflow toolchain on OSU018 (180 nm) standard cell library. Performed logic synthesis (Yosys), floorplanning, placement, clock tree synthesis (CTS), routing, static timing analysis (OpenSTA), and DRC/LVS physical sign-off.</p>
+            <div class="project-actions-row"><a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
           </div>
         </article>
 
-        <!-- Project 3 — Smart Rover -->
-        <article class="project-card project-card-full reveal" data-category="embedded" aria-label="Smart Rover project">
-          <div class="project-card-media" style="background:var(--bg-soft);">
+        <article class="project-card project-card-full reveal" data-tags="project hard embedded robotics" aria-label="Multi-Degree-of-Freedom Robotic Arm Design & Development">
+          <div class="project-card-media">
             <div class="placeholder-art">
-              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-                <rect x="8" y="20" width="48" height="28" rx="4" stroke="currentColor" stroke-width="1.5"/>
-                <circle cx="18" cy="52" r="6" stroke="currentColor" stroke-width="1.5"/>
-                <circle cx="46" cy="52" r="6" stroke="currentColor" stroke-width="1.5"/>
-                <line x1="28" y1="34" x2="36" y2="34" stroke="currentColor" stroke-width="1.5"/>
-              </svg>
-              <span>Arduino · Embedded</span>
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect x="14" y="18" width="36" height="28" rx="6" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="24" cy="30" r="4" fill="currentColor" opacity=".4"/>
+          <circle cx="40" cy="30" r="4" fill="currentColor" opacity=".4"/>
+          <line x1="24" y1="38" x2="40" y2="38" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="32" y1="8" x2="32" y2="18" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="32" cy="6" r="3" fill="currentColor"/>
+        </svg>
+              <span>Project · Hard</span>
             </div>
+            <div class="view-circle">↗</div>
           </div>
           <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-project">Project</span>
+                <span class="badge-diff badge-hard">● Hard</span>
+              </div>
+              <span class="project-period">2025 – 2026</span>
+            </div>
+            <h3 class="project-title">Multi-Degree-of-Freedom Robotic Arm Design & Development</h3>
             <div class="tag-row">
-              <span class="tag">Embedded</span>
-              <span class="tag">Arduino Uno</span>
-              <span class="tag">C</span>
-              <span class="tag">Bluetooth</span>
+              <span class="tag">Robotics</span><span class="tag">Arduino</span><span class="tag">Kinematics</span><span class="tag">Servo Control</span><span class="tag">Embedded C</span>
             </div>
-            <h3>Smart Rover — Multi-Function Robotic Car</h3>
-            <p>Arduino Uno-based robotic car with HC-SR04 ultrasonic sensor, L298N motor driver, and HC-05/06 Bluetooth module. Four operating modes: autonomous obstacle avoidance, Bluetooth control, serial terminal control, and voice control. Jan 2026 – Apr 2026.</p>
-            <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
-              <a class="btn-secondary" href="#" style="font-size:13px;padding:9px 20px;">GitHub</a>
-            </div>
+            <p class="project-desc">Engineered a functional multi-joint robotic manipulator arm with high-torque servo motors capable of precise object grasping and pick-and-place manipulation. Implemented forward and inverse kinematics logic, custom PWM joint calibration, and circuit power distribution.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/ROBOTICS.pdf" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (PDF)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
           </div>
         </article>
 
-        <!-- Project 4 — IV Therapy Monitor -->
-        <article class="project-card project-card-full reveal reveal-delay-1" data-category="embedded" aria-label="IV Therapy Monitor project">
-          <div class="project-card-media" style="background:var(--bg-soft);">
+        <article class="project-card project-card-full reveal" data-tags="project hard cloud ml" aria-label="Cloud-Based Drug Discovery & High-Performance Bio-Screening Pipeline">
+          <div class="project-card-media">
             <div class="placeholder-art">
-              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-                <rect x="24" y="4" width="16" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/>
-                <line x1="32" y1="28" x2="32" y2="44" stroke="currentColor" stroke-width="1.5"/>
-                <rect x="16" y="44" width="32" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/>
-                <circle cx="32" cy="52" r="3" fill="currentColor" opacity=".3"/>
-              </svg>
-              <span>IoT · Healthcare</span>
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M18 42 C12 42, 8 38, 8 32 C8 27, 12 23, 17 22 C19 14, 26 8, 35 8 C44 8, 51 14, 53 22 C57 23, 60 27, 60 32 C60 38, 55 42, 49 42 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="32" cy="28" r="4" fill="currentColor" opacity=".3"/>
+        </svg>
+              <span>Project · Hard</span>
             </div>
+            <div class="view-circle">↗</div>
           </div>
           <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-project">Project</span>
+                <span class="badge-diff badge-hard">● Hard</span>
+              </div>
+              <span class="project-period">2025 – 2026</span>
+            </div>
+            <h3 class="project-title">Cloud-Based Drug Discovery & High-Performance Bio-Screening Pipeline</h3>
             <div class="tag-row">
-              <span class="tag">Embedded</span>
-              <span class="tag">Arduino Uno</span>
-              <span class="tag">ESP8266</span>
-              <span class="tag">C</span>
-              <span class="tag">LCD</span>
+              <span class="tag">Cloud Computing</span><span class="tag">Distributed Systems</span><span class="tag">HPC</span><span class="tag">Bioinformatics</span>
             </div>
-            <h3>Intelligent IV Therapy Monitoring &amp; Automatic Flow Control</h3>
-            <p>Tracks IV fluid level and flow rate in real time and alerts medical staff when fluid level is critically low. Built using Arduino Uno, ESP8266 Wi-Fi module, and LCD display for on-site monitoring. Jan 2026 – Apr 2026.</p>
-            <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
-              <a class="btn-secondary" href="#" style="font-size:13px;padding:9px 20px;">GitHub</a>
+            <p class="project-desc">Designed a scalable cloud computing architecture to tackle computational bottlenecks in modern drug discovery pipelines. Utilizes distributed compute clusters and high-throughput molecular docking simulations, cutting down pharmaceutical R&D turnaround time and computational cost.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/Advanced Cloud Computing Submission . (2).docx" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (DOCX)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-full reveal" data-tags="project medium embedded robotics" aria-label="Smart Rover: Multi-Function Robotic Car">
+          <div class="project-card-media">
+            <div class="placeholder-art">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect x="14" y="18" width="36" height="28" rx="6" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="24" cy="30" r="4" fill="currentColor" opacity=".4"/>
+          <circle cx="40" cy="30" r="4" fill="currentColor" opacity=".4"/>
+          <line x1="24" y1="38" x2="40" y2="38" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="32" y1="8" x2="32" y2="18" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="32" cy="6" r="3" fill="currentColor"/>
+        </svg>
+              <span>Project · Medium</span>
             </div>
+            <div class="view-circle">↗</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-project">Project</span>
+                <span class="badge-diff badge-medium">● Medium</span>
+              </div>
+              <span class="project-period">Jan 2026 – Apr 2026</span>
+            </div>
+            <h3 class="project-title">Smart Rover: Multi-Function Robotic Car</h3>
+            <div class="tag-row">
+              <span class="tag">Embedded Systems</span><span class="tag">Arduino Uno</span><span class="tag">HC-SR04</span><span class="tag">L298N</span><span class="tag">Bluetooth HC-05</span>
+            </div>
+            <p class="project-desc">Constructed an autonomous robotic rover with four dynamic operational modes: autonomous ultrasonic obstacle avoidance, Bluetooth mobile telemetry, serial console control, and voice navigation. Integrated HC-SR04 sonar with dual H-bridge motor driver.</p>
+            <div class="project-actions-row"><a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-full reveal" data-tags="project medium embedded" aria-label="Intelligent IV Therapy Monitoring & Automatic Flow Control System">
+          <div class="project-card-media">
+            <div class="placeholder-art">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect x="22" y="6" width="20" height="26" rx="3" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="32" y1="32" x2="32" y2="48" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M16 48 L48 48 L40 58 L24 58 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="32" cy="18" r="4" fill="currentColor" opacity=".3"/>
+        </svg>
+              <span>Project · Medium</span>
+            </div>
+            <div class="view-circle">↗</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-project">Project</span>
+                <span class="badge-diff badge-medium">● Medium</span>
+              </div>
+              <span class="project-period">Jan 2026 – Apr 2026</span>
+            </div>
+            <h3 class="project-title">Intelligent IV Therapy Monitoring & Automatic Flow Control System</h3>
+            <div class="tag-row">
+              <span class="tag">Biomedical IoT</span><span class="tag">Arduino Uno</span><span class="tag">ESP8266 Wi-Fi</span><span class="tag">Invention Disclosure</span>
+            </div>
+            <p class="project-desc">Developed a real-time medical automation device (IDF patent document) that continuously measures IV drip fluid levels and flow rates, automatically throttling the line and dispatching wireless alerts over ESP8266 Wi-Fi when empty to protect patients from dry-drip and air embolism risks.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/SmartIV_IDF_B_Filled.docx" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (DOCX)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-full reveal" data-tags="project medium vlsi" aria-label="Digital FSM Controller for Automated Washing Machine">
+          <div class="project-card-media">
+            <div class="placeholder-art">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect x="8" y="12" width="48" height="40" rx="4" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="24" x2="48" y2="24" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="32" x2="40" y2="32" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="40" x2="44" y2="40" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="28" y="4" width="8" height="10" rx="2" fill="currentColor" opacity=".2"/>
+        </svg>
+              <span>Project · Medium</span>
+            </div>
+            <div class="view-circle">↗</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-project">Project</span>
+                <span class="badge-diff badge-medium">● Medium</span>
+              </div>
+              <span class="project-period">Nov 2025</span>
+            </div>
+            <h3 class="project-title">Digital FSM Controller for Automated Washing Machine</h3>
+            <div class="tag-row">
+              <span class="tag">Verilog HDL</span><span class="tag">ModelSim</span><span class="tag">FSM Design</span><span class="tag">Digital IC</span>
+            </div>
+            <p class="project-desc">Designed, synthesized, and verified an automated multi-phase washing machine state machine controller in Verilog HDL. Structured synchronous sequential FSM states encompassing Soak, Wash, Rinse, and Spin with comprehensive testbench verification in ModelSim.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/VLSI FINAL PROJECT.pdf" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (PDF)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-full reveal" data-tags="project medium embedded rf" aria-label="Wireless Light-Intensity Controlled Motor using RF Communication">
+          <div class="project-card-media">
+            <div class="placeholder-art">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="6" fill="currentColor"/>
+          <path d="M20 20 C14 26, 14 38, 20 44" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M44 20 C50 26, 50 38, 44 44" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M14 14 C4 24, 4 40, 14 50" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M50 14 C60 24, 60 40, 50 50" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+              <span>Project · Medium</span>
+            </div>
+            <div class="view-circle">↗</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-project">Project</span>
+                <span class="badge-diff badge-medium">● Medium</span>
+              </div>
+              <span class="project-period">Nov 2025</span>
+            </div>
+            <h3 class="project-title">Wireless Light-Intensity Controlled Motor using RF Communication</h3>
+            <div class="tag-row">
+              <span class="tag">Control Systems</span><span class="tag">RF 433MHz</span><span class="tag">LDR Sensor</span><span class="tag">Digital Comms</span>
+            </div>
+            <p class="project-desc">Implemented a wireless closed-loop motor regulation system. Encodes ambient illuminance detected via LDR into digital binary representations transmitted over 433 MHz RF link to dynamically actuate remote receiver motor speeds without physical wiring.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/ControlSystems12.docx" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (DOCX)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-full reveal" data-tags="project medium embedded" aria-label="Directional Optical Visitor Counter & Automated Power Management">
+          <div class="project-card-media">
+            <div class="placeholder-art">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect x="12" y="14" width="40" height="36" rx="4" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="24" cy="32" r="5" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="40" cy="32" r="5" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="24" y1="14" x2="24" y2="8" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="40" y1="14" x2="40" y2="8" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+              <span>Project · Medium</span>
+            </div>
+            <div class="view-circle">↗</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-project">Project</span>
+                <span class="badge-diff badge-medium">● Medium</span>
+              </div>
+              <span class="project-period">Apr 2025</span>
+            </div>
+            <h3 class="project-title">Directional Optical Visitor Counter & Automated Power Management</h3>
+            <div class="tag-row">
+              <span class="tag">Digital Electronics</span><span class="tag">IR Sensors</span><span class="tag">7-Segment Display</span><span class="tag">Automation</span>
+            </div>
+            <p class="project-desc">Built a bidirectional room entry and exit occupancy tracker using spaced dual IR beam sensors and asynchronous up/down counter logic. Directly drives dual 7-segment displays and manages automated room power cutoffs when occupancy reaches zero.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/3534494543363331050.docx" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (DOCX)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-full reveal" data-tags="project medium ml" aria-label="Employee Pay Scale Classification & Demographic Predictor">
+          <div class="project-card-media">
+            <div class="placeholder-art">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect x="8" y="8" width="48" height="48" rx="4" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="16" y1="44" x2="22" y2="34" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="22" y1="34" x2="32" y2="40" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="32" y1="40" x2="44" y2="20" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="44" cy="20" r="3" fill="currentColor"/>
+        </svg>
+              <span>Project · Medium</span>
+            </div>
+            <div class="view-circle">↗</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-project">Project</span>
+                <span class="badge-diff badge-medium">● Medium</span>
+              </div>
+              <span class="project-period">Nov 2025</span>
+            </div>
+            <h3 class="project-title">Employee Pay Scale Classification & Demographic Predictor</h3>
+            <div class="tag-row">
+              <span class="tag">Machine Learning</span><span class="tag">Python</span><span class="tag">Scikit-Learn</span><span class="tag">Data Preprocessing</span>
+            </div>
+            <p class="project-desc">Developed a supervised machine learning classification pipeline to predict employee income tiers (>50k vs <=50k). Performed feature encoding, outlier reduction, class imbalance handling, and comparative evaluation across multiple ML algorithms.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/EMPLOYEE PAY SCALE ESTIMATOR-2.pdf" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (PDF)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-full reveal" data-tags="case-study hard rf" aria-label="Dual-Band Bandpass Filter Design using Coupled Transmission Lines">
+          <div class="project-card-media">
+            <div class="placeholder-art">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M6 32 C14 16, 18 16, 26 32 C34 48, 38 48, 46 32 C50 24, 54 24, 58 32" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="26" cy="32" r="3" fill="currentColor" opacity=".3"/>
+          <circle cx="46" cy="32" r="3" fill="currentColor" opacity=".3"/>
+        </svg>
+              <span>Case Study · Hard</span>
+            </div>
+            <div class="view-circle">↗</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-case-study">Case Study</span>
+                <span class="badge-diff badge-hard">● Hard</span>
+              </div>
+              <span class="project-period">Nov 2025</span>
+            </div>
+            <h3 class="project-title">Dual-Band Bandpass Filter Design using Coupled Transmission Lines</h3>
+            <div class="tag-row">
+              <span class="tag">Applied Microwaves</span><span class="tag">Coupled Lines</span><span class="tag">S-Parameters</span><span class="tag">RF Filter</span>
+            </div>
+            <p class="project-desc">In-depth electromagnetic case study on parallel coupled microstrip transmission lines for dual-band bandpass filtering in modern wireless standards. Analyzed even- and odd-mode impedances, insertion loss (S21), return loss (S11), and high out-of-band rejection.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/23BEC0362 AM CASE STUDY.pdf" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (PDF)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-full reveal" data-tags="case-study hard rf" aria-label="Performance Evaluation of HARQ Schemes in 5G NR under Fading Channels">
+          <div class="project-card-media">
+            <div class="placeholder-art">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M6 32 C14 16, 18 16, 26 32 C34 48, 38 48, 46 32 C50 24, 54 24, 58 32" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="26" cy="32" r="3" fill="currentColor" opacity=".3"/>
+          <circle cx="46" cy="32" r="3" fill="currentColor" opacity=".3"/>
+        </svg>
+              <span>Case Study · Hard</span>
+            </div>
+            <div class="view-circle">↗</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-case-study">Case Study</span>
+                <span class="badge-diff badge-hard">● Hard</span>
+              </div>
+              <span class="project-period">Apr 2026</span>
+            </div>
+            <h3 class="project-title">Performance Evaluation of HARQ Schemes in 5G NR under Fading Channels</h3>
+            <div class="tag-row">
+              <span class="tag">5G New Radio</span><span class="tag">HARQ CC & IR</span><span class="tag">Rayleigh/Rician Fading</span><span class="tag">MATLAB</span>
+            </div>
+            <p class="project-desc">Rigorous simulation and analytical study comparing Chase Combining (CC) and Incremental Redundancy (IR) HARQ error control protocols in 5G NR. Simulated Block Error Rate (BLER) and spectral throughput across diverse Doppler and multi-path fading models.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/wmc rep.pdf" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (PDF)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-full reveal" data-tags="case-study hard rf ml" aria-label="Information-Theoretic Radar Signal Encoding for Noise-Resilient Detection">
+          <div class="project-card-media">
+            <div class="placeholder-art">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M6 32 C14 16, 18 16, 26 32 C34 48, 38 48, 46 32 C50 24, 54 24, 58 32" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="26" cy="32" r="3" fill="currentColor" opacity=".3"/>
+          <circle cx="46" cy="32" r="3" fill="currentColor" opacity=".3"/>
+        </svg>
+              <span>Case Study · Hard</span>
+            </div>
+            <div class="view-circle">↗</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-case-study">Case Study</span>
+                <span class="badge-diff badge-hard">● Hard</span>
+              </div>
+              <span class="project-period">Mar 2026</span>
+            </div>
+            <h3 class="project-title">Information-Theoretic Radar Signal Encoding for Noise-Resilient Detection</h3>
+            <div class="tag-row">
+              <span class="tag">Information Theory</span><span class="tag">Radar Signals</span><span class="tag">Pulse Compression</span><span class="tag">Coding</span>
+            </div>
+            <p class="project-desc">Theoretical investigation applying information-theoretic channel bounds to radar waveform encoding. Evaluated Barker and Frank phase codes with pulse compression filters to optimize mutual information transfer and target detection fidelity in severe clutter and noise.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/ITC FINAL (1).docx" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (DOCX)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-full reveal" data-tags="case-study hard ml" aria-label="Agent-Targeted Web Cloaking: Emerging Threats in Autonomous AI Browsing">
+          <div class="project-card-media">
+            <div class="placeholder-art">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M32 6 L52 14 V28 C52 42, 43 53, 32 58 C21 53, 12 42, 12 28 V14 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="32" cy="30" r="5" fill="currentColor" opacity=".3"/>
+        </svg>
+              <span>Case Study · Hard</span>
+            </div>
+            <div class="view-circle">↗</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-case-study">Case Study</span>
+                <span class="badge-diff badge-hard">● Hard</span>
+              </div>
+              <span class="project-period">Apr 2026</span>
+            </div>
+            <h3 class="project-title">Agent-Targeted Web Cloaking: Emerging Threats in Autonomous AI Browsing</h3>
+            <div class="tag-row">
+              <span class="tag">AI Agents</span><span class="tag">Adversarial AI</span><span class="tag">Web Architecture</span><span class="tag">Cybersecurity</span>
+            </div>
+            <p class="project-desc">Cutting-edge security research on adversarial evasion techniques designed to exploit autonomous AI web browsing agents. Analyzed DOM manipulation, dynamic fingerprinting, and prompt injection vectors that spoof agent decision engines.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/Agent-Targeted-Web-Cloaking (2).pptx" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (PPTX)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-full reveal" data-tags="case-study hard rf" aria-label="Dispersion Compensation Techniques in High-Frequency Radio over Fiber">
+          <div class="project-card-media">
+            <div class="placeholder-art">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M6 32 C14 16, 18 16, 26 32 C34 48, 38 48, 46 32 C50 24, 54 24, 58 32" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="26" cy="32" r="3" fill="currentColor" opacity=".3"/>
+          <circle cx="46" cy="32" r="3" fill="currentColor" opacity=".3"/>
+        </svg>
+              <span>Case Study · Hard</span>
+            </div>
+            <div class="view-circle">↗</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-case-study">Case Study</span>
+                <span class="badge-diff badge-hard">● Hard</span>
+              </div>
+              <span class="project-period">Apr 2026</span>
+            </div>
+            <h3 class="project-title">Dispersion Compensation Techniques in High-Frequency Radio over Fiber</h3>
+            <div class="tag-row">
+              <span class="tag">Optical Comms</span><span class="tag">OptiSystem</span><span class="tag">60GHz RoF</span><span class="tag">Fiber Bragg Grating</span>
+            </div>
+            <p class="project-desc">Comparative optical simulation study in OptiSystem evaluating Dispersion Compensating Fiber (DCF) and Fiber Bragg Gratings (FBG) in millimeter-wave 60 GHz Radio-over-Fiber (RoF) links, analyzing Q-factor, eye opening, and bit error rate (BER) improvements.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/ofc_final.pdf" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (PDF)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-full reveal" data-tags="case-study medium robotics" aria-label="3D Printing Technology: Overview, Methods & Rapid Prototyping">
+          <div class="project-card-media">
+            <div class="placeholder-art">
+              <svg width="48" height="48" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M32 8 L54 20 V44 L32 56 L10 44 V20 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <line x1="32" y1="8" x2="32" y2="32" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="32" y1="32" x2="54" y2="20" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="32" y1="32" x2="10" y2="20" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+              <span>Case Study · Medium</span>
+            </div>
+            <div class="view-circle">↗</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-meta-row">
+              <div class="badge-group">
+                <span class="badge-type badge-case-study">Case Study</span>
+                <span class="badge-diff badge-medium">● Medium</span>
+              </div>
+              <span class="project-period">Oct 2025</span>
+            </div>
+            <h3 class="project-title">3D Printing Technology: Overview, Methods & Rapid Prototyping</h3>
+            <div class="tag-row">
+              <span class="tag">Additive Manufacturing</span><span class="tag">FDM / SLA / SLS</span><span class="tag">Rapid Prototyping</span><span class="tag">CAD</span>
+            </div>
+            <p class="project-desc">Technical review of modern additive manufacturing technologies, examining fused deposition modeling (FDM), stereolithography (SLA), and material selections for hardware electronics enclosure prototyping and rapid mechanical component fabrication.</p>
+            <div class="project-actions-row"><a class="btn-primary" href="projects/Untitled.pdf" target="_blank" style="font-size:12px;padding:9px 18px;"><span class="arrow">↓</span> View Document (PDF)</a> <a class="btn-secondary" href="https://github.com/AzaanGIT" target="_blank" rel="noopener" style="font-size:12px;padding:8px 16px;">GitHub</a></div>
           </div>
         </article>
 

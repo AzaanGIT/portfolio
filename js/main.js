@@ -180,12 +180,19 @@ function initContactForm () {
 function initFilters () {
   document.querySelectorAll('.filter-chip').forEach(chip => {
     chip.addEventListener('click', () => {
-      const group = chip.closest('.filter-chips');
-      group.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      const wrapper = chip.closest('.filter-wrapper') || chip.closest('.filter-chips');
+      wrapper.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       const val = chip.dataset.filter;
-      document.querySelectorAll('[data-category]').forEach(card => {
-        const show = val === 'all' || card.dataset.category === val;
+      document.querySelectorAll('[data-category], [data-tags]').forEach(card => {
+        let show = false;
+        if (val === 'all') {
+          show = true;
+        } else if (card.dataset.tags) {
+          show = card.dataset.tags.split(' ').includes(val);
+        } else if (card.dataset.category) {
+          show = card.dataset.category === val;
+        }
         card.style.display = show ? '' : 'none';
       });
     });
