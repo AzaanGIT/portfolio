@@ -29,14 +29,28 @@
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
       background:
+        radial-gradient(42% 45% at 16% 50%, rgba(201, 169, 138, 0.32) 0%, rgba(201, 169, 138, 0) 70%),
+        radial-gradient(38% 42% at 86% 50%, rgba(226, 209, 195, 0.32) 0%, rgba(226, 209, 195, 0) 70%),
         radial-gradient(60% 55% at 50% 52%,
           rgba(201,169,138,.55) 0%,
           rgba(226,209,195,.42) 35%,
           rgba(242,232,224,.22) 62%,
           rgba(253,252,251,0) 100%),
-        linear-gradient(135deg, #fdfcfb 0%, #fdfcfb 10%, #f0e4d8 42%, #fdfcfb 100%);
+        linear-gradient(135deg, #fdfcfb 0%, #fbf8f5 25%, #f0e4d8 50%, #faf6f2 75%, #fdfcfb 100%);
       opacity: 0;
       animation: fadeIn 600ms ease-out 50ms forwards;
+    }
+
+    .hero-pattern {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background-image:
+        linear-gradient(to right, rgba(201, 169, 138, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(201, 169, 138, 0.08) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 30%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 30%, transparent 85%);
+      opacity: 0;
+      animation: fadeIn 800ms ease-out 100ms forwards;
     }
 
     .hero-badge {
@@ -106,20 +120,95 @@
 
     .avail-pill-hero {
       position: absolute;
-      left: clamp(20px, 4vw, 48px); top: 56%; transform: translateY(-50%);
-      display: flex; align-items: center; gap: 10px;
-      background: var(--bg); border: 1px solid var(--line);
-      border-radius: var(--r-pill); padding: 10px 18px 10px 14px;
-      font-size: 14px; font-weight: 500; color: var(--ink);
-      box-shadow: var(--shadow-2);
-      white-space: nowrap;
+      left: clamp(20px, 4vw, 52px);
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      width: clamp(260px, 24vw, 316px);
+      background: rgba(253, 252, 251, 0.90);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(201, 169, 138, 0.45);
+      border-radius: var(--r-md);
+      padding: 13px 17px 12px;
+      box-shadow: 0 12px 32px -8px rgba(38, 30, 24, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.75) inset;
+      text-decoration: none;
       opacity: 0;
-      animation: fadeUp 600ms cubic-bezier(0.16,1,0.3,1) 1020ms forwards;
+      animation: fadeUp 600ms cubic-bezier(0.16, 1, 0.3, 1) 1020ms forwards;
+      transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 240ms ease,
+                  border-color 240ms ease,
+                  background 240ms ease;
+      cursor: pointer;
     }
+    .avail-pill-hero:hover {
+      transform: translateY(calc(-50% - 3px));
+      border-color: var(--lime-400);
+      background: rgba(253, 252, 251, 0.98);
+      box-shadow: 0 18px 40px -8px rgba(38, 30, 24, 0.14), 0 0 0 1px rgba(201, 169, 138, 0.55) inset;
+    }
+    .hero-status-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .status-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .hero-focus-desc {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .focus-title {
+      font-family: 'Urbanist', system-ui, sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .focus-arrow {
+      font-size: 14px;
+      color: var(--ink-3);
+      transition: transform 200ms ease, color 200ms ease;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .avail-pill-hero:hover .focus-arrow {
+      transform: translateX(3px);
+      color: var(--ink);
+    }
+    .hero-focus-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-3);
+      padding-top: 3px;
+      border-top: 1px dashed rgba(201, 169, 138, 0.35);
+      margin-top: 2px;
+    }
+    .meta-sep { opacity: 0.5; }
+
     .tagline-hero {
       position: absolute;
-      right: clamp(20px, 4vw, 48px); top: 56%; transform: translateY(-50%);
-      max-width: 260px; font-size: 15px; line-height: 1.6; color: var(--ink);
+      right: clamp(20px, 4vw, 52px);
+      top: 50%;
+      transform: translateY(-50%);
+      max-width: 270px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink);
       opacity: 0;
       animation: fadeUp 600ms cubic-bezier(0.16,1,0.3,1) 1100ms forwards;
     }
@@ -189,15 +278,51 @@
     .gallery-teaser { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
     @media (max-width: 767px) { .gallery-teaser { grid-template-columns: 1fr 1fr; } }
 
-    /* ── mobile hero ── */
+    /* ── tablet & mobile hero ── */
+    @media (min-width: 768px) and (max-width: 1040px) {
+      .avail-pill-hero {
+        left: 20px;
+        width: 240px;
+        padding: 10px 14px;
+      }
+      .focus-title { font-size: 12.5px; }
+      .tagline-hero {
+        right: 20px;
+        max-width: 220px;
+        font-size: 13.5px;
+      }
+      .hero-portrait-wrap {
+        width: 44vw;
+        max-width: 440px;
+      }
+    }
+
     @media (max-width: 767px) {
-      .greeting { white-space: normal; font-size: 3.2rem; }
-      .role-line { font-size: calc(3.2rem * 1.15); }
-      .hero-portrait-wrap { width: 85vw; max-width: 380px; }
-      .hero-portrait { max-height: 62svh; }
-      .avail-pill-hero { left: 50%; top: auto; bottom: calc(62svh + 70px); transform: translateX(-50%); font-size: 13px; }
-      .tagline-hero { position: static; transform: none; max-width: 100%; text-align: center; padding: 8px clamp(20px,4vw,48px) 0; }
-      .cta-btn-hero { left: 50%; right: auto; transform: translateX(-50%); width: calc(100% - 48px); max-width: 320px; justify-content: center; }
+      .greeting { white-space: normal; font-size: clamp(2.4rem, 10vw, 3.2rem); }
+      .role-line { font-size: clamp(2.8rem, 11vw, 3.6rem); }
+      .hero-portrait-wrap { width: 85vw; max-width: 360px; z-index: 2; }
+      .hero-portrait { max-height: 52svh; }
+      .avail-pill-hero {
+        left: 50%;
+        top: auto;
+        bottom: calc(52svh + 48px);
+        transform: translateX(-50%);
+        width: calc(100% - 40px);
+        max-width: 340px;
+        padding: 11px 15px;
+      }
+      .avail-pill-hero:hover {
+        transform: translateX(-50%) translateY(-2px);
+      }
+      .tagline-hero { display: none; }
+      .cta-btn-hero {
+        left: 50%; right: auto;
+        transform: translateX(-50%);
+        width: calc(100% - 48px);
+        max-width: 320px;
+        justify-content: center;
+        bottom: 24px;
+      }
       .cta-btn-hero:hover { transform: translateX(-50%) translateY(-2px); }
       .social-proof { display: none; }
     }
@@ -356,6 +481,7 @@
 
   <!-- Gradient background -->
   <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-pattern" aria-hidden="true"></div>
 
   <!-- Badge -->
   <div class="hero-badge" role="note" aria-label="VIT Vellore ECE 2027">
@@ -386,16 +512,29 @@
   </div>
 
   <!-- Chrome elements -->
-  <div class="hero-chrome" aria-hidden="true">
+  <div class="hero-chrome">
 
-    <!-- Availability pill -->
-    <div class="avail-pill-hero" role="status">
-      <div class="dot-wrap">
-        <div class="dot-ring"></div>
-        <div class="dot-core"></div>
+    <!-- Active Project Card (replaces plain pill) -->
+    <a class="avail-pill-hero" href="projects.html#rv32i" role="status" aria-label="Currently working on ML-Based Routing &amp; Congestion Predictor for RV32I Processor">
+      <div class="hero-status-tag">
+        <span class="dot-wrap">
+          <span class="dot-ring"></span>
+          <span class="dot-core"></span>
+        </span>
+        <span class="status-label">Currently Working On</span>
       </div>
-      Available for new opportunities
-    </div>
+      <div class="hero-focus-desc">
+        <span class="focus-title">ML-Based Routing &amp; Congestion Predictor for RV32I Processor</span>
+        <span class="focus-arrow">→</span>
+      </div>
+      <div class="hero-focus-meta">
+        <span>Cadence Innovus</span>
+        <span class="meta-sep">·</span>
+        <span>OpenROAD</span>
+        <span class="meta-sep">·</span>
+        <span>ML</span>
+      </div>
+    </a>
 
     <!-- Tagline -->
     <p class="tagline-hero">
