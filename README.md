@@ -1,4 +1,4 @@
-# Azaan — VLSI Physical Design Portfolio
+# AZAAN'S PORTFOLIO
 
 A personal portfolio website built with pure HTML, CSS, and JavaScript.
 
