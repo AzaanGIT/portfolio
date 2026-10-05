@@ -760,14 +760,9 @@ ul, ol { list-style: none; }
   font-size: 14px; font-weight: 500; color: var(--ink);
   box-shadow: var(--shadow-2);
 }
-.dot-wrap { position: relative; width: 12px; height: 12px; flex-shrink: 0; }
-.dot-ring {
-  position: absolute; inset: -4px; border-radius: 50%;
-  background: rgba(201,169,138,.35);
-  animation: pulse 2s ease infinite;
-}
+.dot-wrap { position: relative; width: 8px; height: 8px; flex-shrink: 0; }
+.dot-ring { display: none; }
 .dot-core { position: absolute; inset: 0; border-radius: 50%; background: var(--lime-400); }
-@keyframes pulse { 0%, 100% { transform: scale(1); opacity: .65; } 50% { transform: scale(1.55); opacity: 0; } }
 
 /* ═══════════════════════════════════════════════════════
    SKILL CARDS
