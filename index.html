@@ -176,15 +176,15 @@
     @media (max-width: 640px)  { .works-grid { grid-template-columns: 1fr; } }
 
     .metrics-row {
-      display: grid; grid-template-columns: repeat(4, 1fr);
+      display: grid; grid-template-columns: repeat(3, 1fr);
       border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden;
     }
     .metrics-row .metric-tile { border-right: 1px solid var(--line); }
     .metrics-row .metric-tile:last-child { border-right: none; }
     @media (max-width: 767px) {
-      .metrics-row { grid-template-columns: 1fr 1fr; }
+      .metrics-row { grid-template-columns: 1fr; }
       .metrics-row .metric-tile { border-right: none; border-bottom: 1px solid var(--line); }
-      .metrics-row .metric-tile:nth-child(odd) { border-right: 1px solid var(--line); }
+      .metrics-row .metric-tile:last-child { border-bottom: none; }
     }
     .gallery-teaser { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
     @media (max-width: 767px) { .gallery-teaser { grid-template-columns: 1fr 1fr; } }
@@ -607,20 +607,16 @@
     <p class="eyebrow text-center reveal mb-48">By the numbers</p>
     <div class="metrics-row reveal">
       <div class="metric-tile">
-        <span class="metric-number" data-count="30500" data-suffix="+">0</span>
-        <p class="metric-label">rows in custom congestion dataset</p>
-      </div>
-      <div class="metric-tile">
-        <span class="metric-number" data-count="3" data-suffix="+">0</span>
-        <p class="metric-label">complete RTL-to-GDS flow projects</p>
+        <span class="metric-number" data-count="16" data-suffix="+">0</span>
+        <p class="metric-label">projects &amp; case studies completed</p>
       </div>
       <div class="metric-tile">
         <span class="metric-number" data-count="12" data-suffix="+">0</span>
         <p class="metric-label">university events led as Photography Head</p>
       </div>
       <div class="metric-tile">
-        <span class="metric-number" data-count="10" data-suffix="+">0</span>
-        <p class="metric-label">EDA tools &amp; languages</p>
+        <span class="metric-number" data-count="2" data-suffix="">0</span>
+        <p class="metric-label">student clubs led as Head (SAHITI &amp; VRIKSH)</p>
       </div>
     </div>
   </div>
