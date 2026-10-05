@@ -260,11 +260,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const roleEl = document.getElementById('roleText');
   if (roleEl) {
     initTypewriter(roleEl, [
-      'ECE Student & Innovator',
-      'Embedded Systems Builder',
-      'ML & EDA Explorer',
-      'Robotics & Hardware Creator',
-      'RTL-to-GDS Enthusiast',
+      'Embedded Enthusiast',
+      'Physical Design Engineer',
+      'ML Explorer',
     ]);
   }
 });
