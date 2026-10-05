@@ -7,7 +7,7 @@
   <meta name="description" content="Resume and CV of Azaan — ECE Student at VIT Vellore, VLSI Physical Design Intern at Maven Silicon." />
   <link rel="stylesheet" href="css/style.css" />
   <style>
-    .resume-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
+    .resume-layout { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start; }
     .resume-embed {
       background: var(--bg-soft); border-radius: var(--r-lg);
       aspect-ratio: 210/297;
@@ -16,10 +16,10 @@
     }
     .resume-embed svg { opacity: .3; }
     .resume-embed p { font-size: 14px; color: var(--ink-3); text-align: center; font-family: 'JetBrains Mono', monospace; }
-    .resume-sidebar { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; }
-    @media (max-width: 1023px) {
-      .resume-layout { grid-template-columns: 1fr; }
-      .resume-sidebar { position: static; }
+    .resume-sidebar { position: static; display: flex; flex-direction: column; gap: 20px; }
+    @media (min-width: 1024px) {
+      .resume-layout { grid-template-columns: 1fr 320px; }
+      .resume-sidebar { position: sticky; top: 100px; }
     }
     .resume-card { background: var(--bg-soft); border-radius: var(--r-lg); padding: 28px; border: 1px solid var(--line); }
     .resume-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 16px; }

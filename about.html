@@ -11,8 +11,8 @@
   <style>
     .about-split {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      grid-template-columns: 1fr;
+      gap: 36px;
       align-items: start;
     }
 
@@ -24,20 +24,21 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: sticky;
-      top: 100px;
+      max-width: 380px;
+      margin: 0 auto;
+      width: 100%;
     }
 
-    @media (max-width: 1023px) {
+    @media (min-width: 1024px) {
       .about-split {
-        grid-template-columns: 1fr;
-        gap: 36px;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
       }
       .about-photo {
-        position: static;
-        max-width: 380px;
-        margin: 0 auto;
-        width: 100%;
+        position: sticky;
+        top: 100px;
+        max-width: none;
+        margin: 0;
       }
     }
 
