@@ -82,7 +82,7 @@ MDX posts with reading time and tags. Seed 2 titles: "Why congestion happens aft
 Embedded PDF viewer + "Download PDF" button.
 
 ### Contact
-Form (name, email, message, honeypot spam field), direct email, LinkedIn, GitHub, success/error states, location "Vellore / Chennai, India".
+Form (name, email, message, honeypot spam field), direct email, LinkedIn, GitHub, success/error states, location "Vellore, India".
 
 ### 404
 On-theme: "Route not found." with a button back home.
